@@ -8,7 +8,7 @@ export default function ListNewSong({ title, data }) {
     setSelected(item);
     setData(data[item]);
   };
-  console.log("dataI", dataI);
+
   return (
     <div className="mt-12 ">
       <h2 className="text-white font-extrabold text-xl px-2">

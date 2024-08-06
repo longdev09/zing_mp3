@@ -1,6 +1,7 @@
 import { FaCirclePlay, FaEllipsis } from "../../assets/icon";
 
 export default function CartHorzontal({ title, thumbnail }) {
+
   return (
     <div className="p-2 group cursor-pointer hover:bg-[#feffff1a] rounded-md transition duration-300">
       <div className="flex items-center flex-row ">

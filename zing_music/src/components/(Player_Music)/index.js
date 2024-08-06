@@ -1,11 +1,51 @@
-export default function PlayMusic() {
-  return (
-    <audio
-      autoPlay
-      controls
-      src="https://a128-z3.zmdcdn.me/126e4ecad7e14151fc8699709ed281ae?authen=exp=1722860050~acl=/126e4ecad7e14151fc8699709ed281ae/*~hmac=8a0c06b6074d294073fe60e095b30e43"
-    >
-      Your browser does not support the audio element.
-    </audio>
-  );
+import { useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setCurrentTime,
+  setSongTime,
+} from "../../redux/features/music/currentTimeSlice";
+
+export default function PlayMusic({ url, isPlay }) {
+  const audioRef = useRef(null);
+  const dispatch = useDispatch();
+  const { currentTime } = useSelector((state) => state.currentTime);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      if (audio.src !== url) {
+        audio.src = url;
+        audio.load(); // Tải lại URL mới nếu URL thay đổi
+        dispatch(setCurrentTime(0));
+      }
+
+      const handleLoadedMetadata = () => {
+        dispatch(setSongTime(audio.duration));
+      };
+
+      /// su kien lay time bai hat
+      audio.currentTime = currentTime;
+      const updateTime = () => {
+        dispatch(setCurrentTime(audio.currentTime));
+      };
+
+      audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+      audio.addEventListener("timeupdate", updateTime);
+
+      if (isPlay) {
+        audio.play().catch((error) => {
+          console.error("Play error:", error);
+        });
+      } else {
+        audio.pause();
+      }
+      // Dọn dẹp sự kiện khi component bị hủy
+      return () => {
+        audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+        audio.removeEventListener("timeupdate", updateTime);
+      };
+    }
+  }, [url, isPlay]);
+
+  return <audio ref={audioRef} />;
 }

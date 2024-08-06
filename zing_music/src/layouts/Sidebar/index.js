@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import Logo from "../../components/Logo";
 import { MenuSideBar1, MenuSideBar2 } from "../../constant";
 import Button from "../../components/Button";
+import { memo } from "react";
 
-export default function SideBar() {
+function SideBar() {
   return (
     <div className="w-[15rem] bg-[#231b2e] relative top-0 left-0 z-30 ">
       <div className="flex flex-col">
@@ -58,3 +59,4 @@ export default function SideBar() {
     </div>
   );
 }
+export default memo(SideBar);

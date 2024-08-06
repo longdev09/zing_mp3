@@ -1,12 +1,36 @@
-import { FaCirclePlay, FaEllipsis, FaHeart } from "../../assets/icon";
-import { useFetch } from "../../hooks";
-import { useDispatch } from "react-redux";
-import { fetchApiPlayList } from "../../redux/features/music/musicPlaySlice";
-export default function Cart({ thumbnail, nameSong, artists, idList }) {
+import { useDispatch, useSelector } from "react-redux";
+import {
+  FaPlay,
+  IconLoading,
+  FaEllipsis,
+  FaHeart,
+  IconPlaying,
+} from "../../assets/icon";
+import {
+  fetchApiPlayList,
+  pause,
+  play,
+} from "../../redux/features/music/musicPlaySlice";
+import { memo, useState } from "react";
+function Cart({ thumbnail, nameSong, artists, idList }) {
+  console.log("hshshshshs");
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const { playList, isPlay } = useSelector((state) => state.musicPlay);
+
+  const handleGetPlayList = () => {
+    setIsLoading(true);
+    dispatch(fetchApiPlayList(idList)).finally(() => {
+      setIsLoading(false);
+    });
+  };
+
+  const handlePlause = () => {
+    dispatch(pause());
+  };
 
   const handlePlay = () => {
-    dispatch(fetchApiPlayList(idList));
+    dispatch(play());
   };
 
   return (
@@ -14,13 +38,36 @@ export default function Cart({ thumbnail, nameSong, artists, idList }) {
       <div className="w-full overflow-hidden group cursor-pointer rounded-lg">
         <div className=" relative">
           <img
-            className="rounded-lg w-full h-full group-hover:scale-110 group-hover:opacity-75 transition duration-500"
+            className={`rounded-lg w-full h-full group-hover:scale-110 ${
+              playList?.encodeId == idList
+                ? "opacity-75"
+                : "group-hover:opacity-75"
+            }  transition duration-500`}
             src={thumbnail}
           />
-          <div className="absolute top-[50%] left-0 right-0 bottom-auto translate-x-(-50%)  translate-y-[-50%] opacity-0 group-hover:opacity-100 transition duration-300">
+          <div
+            className={`absolute top-[50%] left-0 right-0 bottom-auto translate-x-(-50%) translate-y-[-50%] ${
+              playList?.encodeId == idList ? "opacity-100" : "opacity-0"
+            } group-hover:opacity-100 transition duration-300`}
+          >
             <div className="text-white flex flex-row justify-around items-center px-3">
               <FaHeart className="text-2xl" />
-              <FaCirclePlay onClick={handlePlay} className="text-5xl " />
+              <div className="w-[40px] h-[40px] flex items-center justify-center rounded-full border">
+                {playList?.encodeId == idList && playList?.encodeId != null ? (
+                  isPlay ? (
+                    <IconPlaying onClick={handlePlause} />
+                  ) : (
+                    <FaPlay onClick={handlePlay} className="text-[18px] ml-1" />
+                  )
+                ) : isLoading ? (
+                  <IconLoading />
+                ) : (
+                  <FaPlay
+                    onClick={handleGetPlayList}
+                    className="text-[18px]  ml-1"
+                  />
+                )}
+              </div>
               <FaEllipsis className="text-2xl" />
             </div>
           </div>
@@ -37,3 +84,4 @@ export default function Cart({ thumbnail, nameSong, artists, idList }) {
     </div>
   );
 }
+export default memo(Cart);

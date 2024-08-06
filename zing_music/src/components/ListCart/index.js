@@ -26,12 +26,6 @@ export default function ListCart({ title, viewAll, data }) {
           ))}
         </Swiper>
       </div>
-
-      {/* <div className="flex mt-4">
-        {data?.slice(0, 5).map((item) => (
-          <Cart nameSong={item.sortDescription} thumbnail={item.thumbnail} />
-        ))}
-      </div> */}
     </div>
   );
 }

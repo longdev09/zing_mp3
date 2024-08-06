@@ -1,3 +1,4 @@
+import { useSelector, useDispatch } from "react-redux";
 import {
   FaBackwardStep,
   FaCirclePlay,
@@ -10,21 +11,41 @@ import {
   FaShuffle,
   FaVolumeHigh,
   FaYoutube,
+  FaPlay,
+  FaPause,
 } from "../../assets/icon";
 import Button from "../../components/Button";
+import { pause, play } from "../../redux/features/music/musicPlaySlice";
 
 export default function Bottom() {
+  const { playList, isPlay, song } = useSelector((state) => state.musicPlay);
+  const dispatch = useDispatch();
+  const handlePlay = () => {
+    dispatch(play());
+  };
+
+  const handlePause = () => {
+    dispatch(pause());
+  };
+
   return (
     <div className="fixed z-40 left-0 right-0  bottom-0 bg-[var(--bg-bottom)]">
       <div className="flex items-center h-[--h-bottom] px-5 justify-between">
         <div className="flex items-center w-[500px] ">
           <img
             className="w-[64px] rounded-lg"
-            src="https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/covers/3/c/3c05380e9dce317d49f2155d106caa01_1366173516.jpg"
+            src={
+              playList?.song.items.find((item) => item.encodeId === song.idSong)
+                ?.thumbnail
+            }
           />
           <div className="flex flex-col ml-3">
             <span className="text-sm font-bold text-white line-clamp-1">
-              vaicaunoicokhiennguoithaydoi (acoustic)
+              {
+                playList?.song.items.find(
+                  (item) => item.encodeId === song.idSong
+                )?.title
+              }
             </span>
             <span className="mt-1 font-bold text-[--text-sub] text-xs">
               Chi dan
@@ -44,9 +65,18 @@ export default function Bottom() {
             <Button className="mx-4 !text-xl">
               <FaBackwardStep />
             </Button>
-            <Button className="!text-4xl mx-5">
-              <FaCirclePlay />
-            </Button>
+            <div className="w-[40px] h-[40px] flex items-center justify-center rounded-full border">
+              {isPlay ? (
+                <Button onclick={handlePause} className="mx-4 !text-xl">
+                  <FaPause />
+                </Button>
+              ) : (
+                <Button onclick={handlePlay} className="mx-4 !text-xl">
+                  <FaPlay />
+                </Button>
+              )}
+            </div>
+
             <Button className="mx-4 !text-xl">
               <FaForwardStep />
             </Button>

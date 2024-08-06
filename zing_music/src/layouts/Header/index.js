@@ -1,9 +1,10 @@
 import { FaDownload, FaGear } from "../../assets/icon";
 import user from "../../assets/Bg/user-default.3ff115bb.png";
 import InputSearch from "../../components/InputSearch";
-export default function Header() {
+import { memo } from "react";
+function Header() {
   return (
-    <div className="h-[var(--h-header)] px-[59px] fixed top-0 z-50 left-[15rem] right-0 bg-[var(--bg-main)]">
+    <div className="h-[var(--h-header)] px-[59px] fixed top-0 z-50 left-[15rem] right-[22rem] bg-[var(--bg-main)]">
       <div className="flex items-center justify-between">
         <div className="flex-1 mr-3">
           <InputSearch />
@@ -30,3 +31,4 @@ export default function Header() {
     </div>
   );
 }
+export default memo(Header);

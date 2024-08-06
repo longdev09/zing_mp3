@@ -13,8 +13,12 @@ import {
   faClone,
   faHeadset,
   faVolumeHigh,
+  faPlay,
+  faStopwatch,
+  faPause,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import iconPlaying from "../Bg/icon-playing.gif";
 
 export const FaDownload = ({ ...props }) => (
   <FontAwesomeIcon icon={faDownload} {...props} />
@@ -68,6 +72,15 @@ export const FaClone = ({ ...props }) => (
 export const FaVolumeHigh = ({ ...props }) => (
   <FontAwesomeIcon icon={faVolumeHigh} {...props} />
 );
+
+export const FaPlay = ({ ...props }) => (
+  <FontAwesomeIcon icon={faPlay} {...props} />
+);
+
+export const FaStopwatch = ({ ...props }) => (
+  <FontAwesomeIcon icon={faStopwatch} />
+);
+export const FaPause = ({ ...props }) => <FontAwesomeIcon icon={faPause} />;
 
 export const IconLibrary = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -175,4 +188,45 @@ export const IconStar = () => (
       stroke-width="1.5"
     ></path>
   </svg>
+);
+
+export const IconLoading = () => (
+  <svg
+    width="40px"
+    height="40px"
+    viewBox="0 0 100 100"
+    preserveAspectRatio="xMidYMid"
+    style={{ background: "none" }}
+  >
+    <g transform="rotate(0 50 50)">
+      {Array.from({ length: 12 }).map((_, i) => (
+        <rect
+          key={i}
+          x="47"
+          y="24"
+          rx="3.76"
+          ry="1.92"
+          width="6"
+          height="12"
+          fill="#f1f1f1"
+          transform={`rotate(${i * 30} 50 50)`}
+        >
+          <animate
+            attributeName="opacity"
+            from="1"
+            to="0"
+            begin={`${i * -0.083333}s`}
+            dur="1s"
+            repeatCount="indefinite"
+          />
+        </rect>
+      ))}
+    </g>
+  </svg>
+);
+
+export const IconPlaying = ({ ...props }) => (
+  <div className="w-[18px] " {...props}>
+    <img src={iconPlaying} />
+  </div>
 );

@@ -1,15 +1,34 @@
-import { useSelector, useDispatch } from "react-redux";
-import { FaCirclePlay, FaEllipsis, FaHeart } from "../../../assets/icon";
-import { fetchApiGetSong } from "../../../redux/features/music/musicPlaySlice";
-
-export default function Item({ thumbnail, title, idSong }) {
-  const song = useSelector((state) => state.musicPlay.song);
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import {
+  FaEllipsis,
+  FaHeart,
+  FaPlay,
+  IconLoading,
+  IconPlaying,
+} from "../../../assets/icon";
+import {
+  fetchApiGetSong,
+  pause,
+  play,
+} from "../../../redux/features/music/musicPlaySlice";
+export default function Item({ thumbnail, title, idSong, artists }) {
+  const { isPlay, song, listRelease, playList } = useSelector(
+    (state) => state.musicPlay
+  );
   const dispatch = useDispatch();
-  const handle = () => {
-    if (idSong == song.idSong) {
+  const handleGetSong = () => {
+    if (idSong == song?.idSong) {
     } else {
       dispatch(fetchApiGetSong(idSong));
     }
+  };
+
+  const handlePlause = () => {
+    dispatch(pause());
+  };
+  const handlePlay = () => {
+    dispatch(play());
   };
 
   return (
@@ -21,8 +40,22 @@ export default function Item({ thumbnail, title, idSong }) {
       <div className="flex items-center flex-row ">
         <div className="w-[40px] h-[40px] relative ">
           <img className="rounded-md group-hover:opacity-75" src={thumbnail} />
-          <div className="group-hover:opacity-100 transition duration-300  opacity-0 absolute top-[50%] left-0 right-0  bottom-auto translate-x-(-50%) translate-y-[-50%] flex justify-center">
-            <FaCirclePlay className="text-white text-lg" />
+          <div
+            className={` ${
+              song?.idSong == idSong ? "opacity-100" : "group-hover:opacity-100"
+            } transition duration-300  opacity-0 absolute top-[50%] left-0 right-0  bottom-auto translate-x-(-50%) translate-y-[-50%] flex justify-center`}
+          >
+            {song?.idSong == idSong && song?.loadingSong == false ? (
+              isPlay ? (
+                <IconPlaying onClick={handlePlause} />
+              ) : (
+                <FaPlay onClick={handlePlay} className="text-white text-lg" />
+              )
+            ) : song?.loadingSong ? (
+              <IconLoading />
+            ) : (
+              <FaPlay onClick={handleGetSong} className="text-white text-lg" />
+            )}
           </div>
         </div>
 
@@ -30,9 +63,18 @@ export default function Item({ thumbnail, title, idSong }) {
           <span className="text-sm text-white font-bold hover:text-[var(--text-pink)] line-clamp-1 ">
             {title}
           </span>
-          <span className="text-xs text-[var(--text-sub)] mt-[3px]">
-            JEON SOMI
-          </span>
+          <div className="line-clamp-1">
+            {artists?.map((item, index) => (
+              <Link
+                key={index}
+                className="text-xs text-[var(--text-sub)] mt-[3px] hover:text-[var(--text-pink)] hover:underline"
+              >
+                <span className="text-xs text-[var(--text-sub)] mt-[3px]">
+                  {item.name + ", "}
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
         <div className="hidden group-hover:block">
           <FaHeart className="text-white text-base px-7" />

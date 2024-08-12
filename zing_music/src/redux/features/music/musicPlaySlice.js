@@ -1,25 +1,53 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import http from "../../../utils/http";
+import { setCurrentTime } from "./currentTimeSlice";
 
 export const fetchApiPlayList = createAsyncThunk(
   "musicPlay/fetchApiPlayList",
-  async (encodeId, { dispatch }) => {
-    const response = await http.get(`playlist/${encodeId}`);
-
-    // Lấy bài hát đầu tiên từ playlist
-    const firstSongId = response.data.data?.song?.items?.[0]?.encodeId;
-    if (firstSongId) {
-      dispatch(fetchApiGetSong(firstSongId));
+  async ({ idList, idSong }, { dispatch, getState }) => {
+    const response = await http.get(`playlist/${idList}`);
+    const res = response.data.data?.song?.items;
+    if (idSong == null && !getState().musicPlay.randomSong) {
+      // Lấy bài hát đầu tiên từ playlist
+      const firstSongId = res?.[0]?.encodeId;
+      if (firstSongId) {
+        dispatch(fetchApiGetSong(firstSongId));
+      }
+    } else {
+      // random bai hat
+      const randDom = Math.floor(Math.random() * res.length);
+      dispatch(fetchApiGetSong(res?.[randDom].encodeId));
     }
+
+    dispatch(setCurrentTime(0));
     return response.data.data;
   }
 );
 
 export const fetchApiGetSong = createAsyncThunk(
   "musicPlay/fetchApiGetSong",
-  async (idSong) => {
+  async (idSong, { dispatch }) => {
     const response = await http.get(`song/${idSong}`);
+    dispatch(setCurrentTime(0));
     return response.data.data;
+  }
+);
+
+export const nextSong = createAsyncThunk(
+  "musicPlay/nextSong",
+  async (listSong, { getState, dispatch }) => {
+    const idSong = getState().musicPlay.song.idSong; // lay ra id bai hat hien tai
+    const indexSong = listSong.findIndex((i) => i.encodeId == idSong);
+    dispatch(fetchApiGetSong(listSong[indexSong + 1].encodeId));
+  }
+);
+
+export const prevSong = createAsyncThunk(
+  "musicPlay/prevSong",
+  async (listSong, { getState, dispatch }) => {
+    const idSong = getState().musicPlay.song.idSong; // lay ra id bai hat hien tai
+    const indexSong = listSong.findIndex((i) => i.encodeId == idSong);
+    dispatch(fetchApiGetSong(listSong[indexSong - 1].encodeId));
   }
 );
 
@@ -29,10 +57,14 @@ export const musicPlaySlice = createSlice({
     playList: null,
     isPlay: false,
     song: null,
+    listRelease: null,
+    randomSong: false,
   },
   extraReducers: (builder) => {
+    builder.addCase(fetchApiPlayList.pending, (state) => {});
     builder.addCase(fetchApiPlayList.fulfilled, (state, action) => {
       state.playList = action.payload;
+      state.listRelease = null;
       state.isPlay = true;
     });
 
@@ -40,12 +72,15 @@ export const musicPlaySlice = createSlice({
     builder.addCase(fetchApiGetSong.pending, (state, action) => {
       state.song = {
         idSong: action.meta.arg,
+        loadingSong: true,
       };
     });
     builder.addCase(fetchApiGetSong.fulfilled, (state, action) => {
+      state.isPlay = true;
       state.song = {
         ...state.song,
         url: action.payload,
+        loadingSong: false,
       };
     });
   },
@@ -57,7 +92,17 @@ export const musicPlaySlice = createSlice({
     play: (state) => {
       state.isPlay = true;
     },
+    setListRelease: (state, action) => {
+      state.isPlay = true;
+      state.playList = null;
+      state.listRelease = action.payload;
+    },
+    setRandomSong: (state, action) => {
+      state.randomSong = action.payload;
+    },
   },
 });
-export const { play, pause } = musicPlaySlice.actions;
+
+export const { play, pause, setListRelease, setRandomSong } =
+  musicPlaySlice.actions;
 export default musicPlaySlice.reducer;

@@ -9,14 +9,12 @@ export default function PlayMusic({ url, isPlay }) {
   const audioRef = useRef(null);
   const dispatch = useDispatch();
   const { currentTime } = useSelector((state) => state.currentTime);
-
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
       if (audio.src !== url) {
         audio.src = url;
         audio.load(); // Tải lại URL mới nếu URL thay đổi
-        dispatch(setCurrentTime(0));
       }
 
       const handleLoadedMetadata = () => {

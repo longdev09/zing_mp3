@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes  } from "react-router-dom";
 import layout from "./layouts";
 import { publicRoutes } from "./routes";
 import PlayMusic from "./components/(Player_Music)";

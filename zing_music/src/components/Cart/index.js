@@ -1,9 +1,10 @@
+import { memo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  FaPlay,
-  IconLoading,
   FaEllipsis,
   FaHeart,
+  FaPlay,
+  IconLoading,
   IconPlaying,
 } from "../../assets/icon";
 import {
@@ -11,16 +12,17 @@ import {
   pause,
   play,
 } from "../../redux/features/music/musicPlaySlice";
-import { memo, useState } from "react";
+
+// play list
+
 function Cart({ thumbnail, nameSong, artists, idList }) {
-  console.log("hshshshshs");
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const { playList, isPlay } = useSelector((state) => state.musicPlay);
 
   const handleGetPlayList = () => {
     setIsLoading(true);
-    dispatch(fetchApiPlayList(idList)).finally(() => {
+    dispatch(fetchApiPlayList({ idList })).finally(() => {
       setIsLoading(false);
     });
   };

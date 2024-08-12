@@ -4,7 +4,7 @@ import Item from "./Item";
 import { useSelector } from "react-redux";
 
 export default function PlayList() {
-  const { playList } = useSelector((state) => state.musicPlay);
+  const { playList, listRelease } = useSelector((state) => state.musicPlay);
 
   return (
     <div
@@ -32,14 +32,25 @@ export default function PlayList() {
         </div>
         {/* play list */}
         <div className="px-2 overflow-auto ">
-          {playList?.song?.items.map((item, index) => (
-            <Item
-              key={index}
-              thumbnail={item.thumbnail}
-              title={item.title}
-              idSong={item?.encodeId}
-            />
-          ))}
+          {playList
+            ? playList?.song?.items.map((item, index) => (
+                <Item
+                  key={index}
+                  thumbnail={item.thumbnail}
+                  title={item.title}
+                  idSong={item?.encodeId}
+                  artists={item.artists}
+                />
+              ))
+            : listRelease?.map((item, index) => (
+                <Item
+                  key={index}
+                  thumbnail={item.thumbnail}
+                  title={item.title}
+                  idSong={item?.encodeId}
+                  artists={item.artists}
+                />
+              ))}
         </div>
       </div>
     </div>

@@ -55,6 +55,21 @@ img {
 
 
 
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.notify-player {
+  animation: slide-up 0.5s ease-out;
+}
+
+
+
 ::-webkit-scrollbar {
   width: 12px; /* Chiều rộng của thanh cuộn */
 }

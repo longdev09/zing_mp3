@@ -24,7 +24,7 @@ import {
   setRandomSong,
 } from "../../redux/features/music/musicPlaySlice";
 
-export default function Bottom() {
+export default function Bottom({ handleNotify }) {
   const { playList, listRelease, isPlay, song, randomSong } = useSelector(
     (state) => state.musicPlay
   );
@@ -181,7 +181,7 @@ export default function Bottom() {
           <Button className="!text-lg mx-2">
             <FaYoutube />
           </Button>
-          <Button className="!text-lg mx-4">
+          <Button onclick={handleNotify} className="!text-lg mx-4">
             <FaMicroscope />
           </Button>
           <Button className="!text-lg mx-4">

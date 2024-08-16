@@ -16,6 +16,8 @@ import {
   faPlay,
   faStopwatch,
   faPause,
+  faChevronDown,
+  faUpRightAndDownLeftFromCenter,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import iconPlaying from "../Bg/icon-playing.gif";
@@ -80,6 +82,15 @@ export const FaPlay = ({ ...props }) => (
 export const FaStopwatch = ({ ...props }) => (
   <FontAwesomeIcon icon={faStopwatch} />
 );
+
+export const FaChevronDown = ({ ...props }) => (
+  <FontAwesomeIcon icon={faChevronDown} />
+);
+
+export const FaUpRightAndDownLeftFromCenter = ({ ...props }) => (
+  <FontAwesomeIcon icon={faUpRightAndDownLeftFromCenter} />
+);
+
 export const FaPause = ({ ...props }) => <FontAwesomeIcon icon={faPause} />;
 
 export const IconLibrary = () => (

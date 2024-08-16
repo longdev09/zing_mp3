@@ -9,6 +9,7 @@ export default function PlayMusic({ url, isPlay }) {
   const audioRef = useRef(null);
   const dispatch = useDispatch();
   const { currentTime } = useSelector((state) => state.currentTime);
+
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
@@ -21,26 +22,31 @@ export default function PlayMusic({ url, isPlay }) {
         dispatch(setSongTime(audio.duration));
       };
 
-      /// su kien lay time bai hat
       audio.currentTime = currentTime;
+
+      let animationFrameId;
+
       const updateTime = () => {
         dispatch(setCurrentTime(audio.currentTime));
+        animationFrameId = requestAnimationFrame(updateTime);
       };
-
-      audio.addEventListener("loadedmetadata", handleLoadedMetadata);
-      audio.addEventListener("timeupdate", updateTime);
 
       if (isPlay) {
         audio.play().catch((error) => {
           console.error("Play error:", error);
         });
+        animationFrameId = requestAnimationFrame(updateTime);
       } else {
         audio.pause();
+        cancelAnimationFrame(animationFrameId);
       }
-      // Dọn dẹp sự kiện khi component bị hủy
+
+      audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+
+      // Dọn dẹp sự kiện và requestAnimationFrame khi component bị hủy
       return () => {
         audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
-        audio.removeEventListener("timeupdate", updateTime);
+        cancelAnimationFrame(animationFrameId);
       };
     }
   }, [url, isPlay]);

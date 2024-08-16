@@ -1,9 +1,15 @@
+import { useState } from "react";
+import NotifyPlayer from "../components/NotifyPlayer";
 import Bottom from "./Bottom";
 import Header from "./Header";
 import PlayList from "./PlayList";
 import SideBar from "./Sidebar";
 
 export default function Layout({ children }) {
+  const [open, setOpen] = useState(false);
+  const handleNotify = () => {
+    setOpen(!open);
+  };
   return (
     <div className="overflow-hidden">
       <Header />
@@ -19,8 +25,8 @@ export default function Layout({ children }) {
 
         <PlayList />
       </div>
-
-      <Bottom />
+      <Bottom handleNotify={handleNotify} />
+      <NotifyPlayer open={open} />
     </div>
   );
 }

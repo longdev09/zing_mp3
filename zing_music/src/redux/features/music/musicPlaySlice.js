@@ -77,10 +77,20 @@ export const musicPlaySlice = createSlice({
     });
     builder.addCase(fetchApiGetSong.fulfilled, (state, action) => {
       state.isPlay = true;
+      let list = null;
+      if (state.listRelease) {
+        list = JSON.parse(JSON.stringify(state.listRelease));
+      }
+      if (state.playList) {
+        list = JSON.parse(JSON.stringify(state.playList.song.items));
+      }
+      const song = list.find((i) => i.encodeId == action.meta.arg);
+
       state.song = {
         ...state.song,
         url: action.payload,
         loadingSong: false,
+        infoSong: song,
       };
     });
   },

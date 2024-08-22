@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -11,7 +12,6 @@ import {
   FaPlay,
   FaRepeat,
   FaShuffle,
-  FaVolumeHigh,
   FaYoutube,
 } from "../../assets/icon";
 import Button from "../../components/Button";
@@ -23,15 +23,14 @@ import {
   prevSong,
   setRandomSong,
 } from "../../redux/features/music/musicPlaySlice";
+import Volume from "../../components/Volume";
+import TimeMusic from "../../components/TimeMusic";
 
 export default function Bottom({ handleNotify }) {
   const { playList, listRelease, isPlay, song, randomSong } = useSelector(
     (state) => state.musicPlay
   );
   const { currentTime, songTime } = useSelector((state) => state.currentTime);
-
-  const currentTimeFm = useConverTime(currentTime);
-  const songTimeFm = useConverTime(songTime);
 
   const dispatch = useDispatch();
   const handlePlay = () => {
@@ -153,29 +152,8 @@ export default function Bottom({ handleNotify }) {
               <FaRepeat />
             </Button>
           </div>
-          <div className="flex items-center mt-2 cursor-pointer">
-            <span className="text-[var(--text-sub)] text-sm mr-2">
-              {currentTimeFm}
-            </span>
-            <div className="flex relative w-full h-[5px] bg-[#5a5560] rounded-lg group hover:h-[7px] transition duration-300">
-              <input
-                value={
-                  songTime == 0 ? 0 : Math.floor((currentTime / songTime) * 100)
-                }
-                type="range"
-                name="range"
-                min="0"
-                max="100"
-                className="bg-none w-full"
-              />
-              {/* <div className="bg-white absolute w-[600px] h-[5px] rounded-lg group-hover:h-[7px] transition duration-300">
-                <div className="hidden group-hover:block absolute w-[12px] h-[12px] bg-white rounded-full translate-x-[590px] translate-y-[-3px]"></div>
-              </div> */}
-            </div>
-            <span className="text-[var(--text-sub)] text-sm ml-2">
-              {songTimeFm}
-            </span>
-          </div>
+
+          <TimeMusic />
         </div>
         <div className="text-white  items-center  w-[500px] flex justify-end ">
           <Button className="!text-lg mx-2">
@@ -187,9 +165,9 @@ export default function Bottom({ handleNotify }) {
           <Button className="!text-lg mx-4">
             <FaClone />
           </Button>
-          <Button className="!text-lg mx-4">
-            <FaVolumeHigh />
-          </Button>
+          <div className="flex items-center">
+            <Volume />
+          </div>
         </div>
       </div>
     </div>

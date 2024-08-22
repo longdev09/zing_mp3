@@ -1,14 +1,19 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setCurrentTime,
   setSongTime,
 } from "../../redux/features/music/currentTimeSlice";
 
-export default function PlayMusic({ url, isPlay }) {
+export default function PlayMusic({ url }) {
   const audioRef = useRef(null);
   const dispatch = useDispatch();
-  const { currentTime } = useSelector((state) => state.currentTime);
+  const { currentTime, volume, songTime } = useSelector(
+    (state) => state.currentTime
+  );
+
+  const { isPlay } = useSelector((state) => state.musicPlay);
+  const [timeht, setTimeHt] = useState(0);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -23,11 +28,12 @@ export default function PlayMusic({ url, isPlay }) {
       };
 
       audio.currentTime = currentTime;
+      audio.volume = volume / 100; // Giữ lại 2 chữ số thập phân
 
       let animationFrameId;
 
       const updateTime = () => {
-        dispatch(setCurrentTime(audio.currentTime));
+        setTimeHt(audio.currentTime);
         animationFrameId = requestAnimationFrame(updateTime);
       };
 
@@ -36,20 +42,21 @@ export default function PlayMusic({ url, isPlay }) {
           console.error("Play error:", error);
         });
         animationFrameId = requestAnimationFrame(updateTime);
-      } else {
+      }
+      if (!isPlay) {
         audio.pause();
+        dispatch(setCurrentTime(timeht));
         cancelAnimationFrame(animationFrameId);
       }
 
       audio.addEventListener("loadedmetadata", handleLoadedMetadata);
-
       // Dọn dẹp sự kiện và requestAnimationFrame khi component bị hủy
       return () => {
         audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
         cancelAnimationFrame(animationFrameId);
       };
     }
-  }, [url, isPlay]);
+  }, [url, isPlay, volume, currentTime, songTime]);
 
   return <audio ref={audioRef} />;
 }

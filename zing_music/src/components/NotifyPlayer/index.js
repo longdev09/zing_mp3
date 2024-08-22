@@ -21,29 +21,23 @@ export default function NotifyPlayer({ open }) {
         open ? "h-full" : "h-0"
       } fixed w-full bottom-0  duration-700 z-50 transition-all overflow-hidden`}
     >
-      <div className="bg-[#34224f] absolute top-0 left-0 right-0 bottom-0">
-        <div className="absolute top-0 left-0 bottom-0 h-full w-full">
-          <img
-            className="scale-110 w-full h-full"
-            style={{ filter: "blur(32px)" }}
-            src="https://photo-resize-zmp3.zmdcdn.me/w360_r1x1_jpeg/avatars/7/9/9/b/799b387d346a819ece784725f7d81aa3.jpg"
-          />
-        </div>
-        <div className="absolute top-0 left-0 bottom-0 w-full h-full bg-[#291547cc]"></div>
+      <div className="absolute top-0 left-0 bottom-0 h-full w-full">
+        <img
+          className="scale-110 w-full h-full"
+          style={{ filter: "blur(32px)" }}
+          src="https://photo-resize-zmp3.zmdcdn.me/w360_r1x1_jpeg/avatars/7/9/9/b/799b387d346a819ece784725f7d81aa3.jpg"
+        />
+      </div>
 
-        <div className="absolute top-0 left-0 right-0 bottom-0 ">
-          <div className="flex flex-col w-full h-full">
-            <Header sttContent={handleContent} />
-            {/* content */}
-            <div className="flex-1 flex items-center overflow-hidden pt-9">
-              {conten == "1" ? (
-                <ContentPlayList list={list} />
-              ) : (
-                <ContentLyric />
-              )}
-            </div>
-            {/* <div className="h-[300px]"></div> */}
-          </div>
+      <div className="absolute top-0 left-0 bottom-0 w-full h-full bg-[#291547cc] "></div>
+
+      <div className="flex flex-col w-full h-full absolute top-0 overflow-hidden">
+        <div className="flex-none">
+          <Header sttContent={handleContent} />
+        </div>
+        {/* content */}
+        <div className="flex-1">
+          {conten == "1" ? <ContentPlayList list={list} /> : <ContentLyric />}
         </div>
       </div>
     </div>

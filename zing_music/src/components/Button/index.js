@@ -7,15 +7,16 @@ export default function Button({
 }) {
   const baseClasses = "text-white text-sm flex items-center select-none";
   const disabledClasses = "opacity-50 cursor-not-allowed";
+  const hover = "hover: bg";
   return (
     <button
       onClick={onclick}
       disabled={disabled}
-      className={`${baseClasses} ${
+      className={` ${baseClasses} ${
         disabled ? disabledClasses : ""
       } ${className}`}
     >
-      {children}
+      <div className="hover:text-[var(--text-purple)]">{children}</div>
       {icon ? icon : ""}
     </button>
   );

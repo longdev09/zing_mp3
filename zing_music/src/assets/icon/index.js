@@ -18,6 +18,7 @@ import {
   faPause,
   faChevronDown,
   faUpRightAndDownLeftFromCenter,
+  faVolumeXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import iconPlaying from "../Bg/icon-playing.gif";
@@ -89,6 +90,10 @@ export const FaChevronDown = ({ ...props }) => (
 
 export const FaUpRightAndDownLeftFromCenter = ({ ...props }) => (
   <FontAwesomeIcon icon={faUpRightAndDownLeftFromCenter} />
+);
+
+export const FaVolumeXmark = ({ ...props }) => (
+  <FontAwesomeIcon icon={faVolumeXmark} />
 );
 
 export const FaPause = ({ ...props }) => <FontAwesomeIcon icon={faPause} />;

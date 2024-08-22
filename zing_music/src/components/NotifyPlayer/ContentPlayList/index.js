@@ -28,7 +28,7 @@ export default function ContentPlayList({ list }) {
   }, [swiperRef, initialSlide]);
 
   return (
-    <>
+    <div className="h-full flex justify-center items-center">
       <Swiper
         modules={[Virtual, Navigation, Pagination]}
         initialSlide={initialSlide}
@@ -49,6 +49,6 @@ export default function ContentPlayList({ list }) {
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </div>
   );
 }

@@ -3,13 +3,15 @@ import Button from "../../components/Button";
 import Item from "./Item";
 import { useSelector } from "react-redux";
 
-export default function PlayList() {
+export default function PlayList({ openPlayList }) {
   const { playList, listRelease } = useSelector((state) => state.musicPlay);
-
+  console.log(openPlayList);
   return (
     <div
       style={{ height: "calc(100vh - 90px)" }}
-      className="bg-[var(--bg-main)] w-[22rem] h-[] relative top-0  right-0 z-30 border-l border-[#ffffff1a] "
+      className={`bg-[var(--bg-main)] w-[22rem] fixed top-0 right-0 z-[99] 2xl:relative border-l border-[#ffffff1a] transition-all duration-300 ${
+        openPlayList ? "w-[22rem]" : "w-0"
+      }`}
     >
       <div className="flex flex-col h-full">
         <div className="flex py-4 px-2">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import NotifyPlayer from "../components/NotifyPlayer";
 import Bottom from "./Bottom";
 import Header from "./Header";
@@ -7,12 +7,19 @@ import SideBar from "./Sidebar";
 
 export default function Layout({ children }) {
   const [open, setOpen] = useState(false);
+
+  const [openPlayList, setOpenPlayList] = useState(false);
   const handleNotify = () => {
     setOpen(!open);
   };
+
+  const handlePlayList = useCallback(() => {
+    setOpenPlayList(!openPlayList);
+  }, [openPlayList]);
+
   return (
     <div className="overflow-hidden">
-      <Header />
+      <Header openPlayList={openPlayList} />
       <div className="flex relative overflow-hidden ">
         <SideBar />
 
@@ -23,9 +30,9 @@ export default function Layout({ children }) {
           {children}
         </div>
 
-        <PlayList />
+        <PlayList openPlayList={openPlayList} />
       </div>
-      <Bottom handleNotify={handleNotify} />
+      <Bottom handleNotify={handleNotify} onPlaylist={handlePlayList} />
       <NotifyPlayer open={open} />
     </div>
   );

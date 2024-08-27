@@ -2,9 +2,13 @@ import { FaDownload, FaGear } from "../../assets/icon";
 import user from "../../assets/Bg/user-default.3ff115bb.png";
 import InputSearch from "../../components/InputSearch";
 import { memo } from "react";
-function Header() {
+function Header({ openPlayList }) {
   return (
-    <div className="h-[var(--h-header)] px-[59px] fixed top-0 z-50 left-[15rem] right-[22rem] bg-[var(--bg-main)]">
+    <div
+      className={` ${
+        openPlayList ? "2xl:right-[22rem]" : "2xl:right-0 "
+      } h-[var(--h-header)] px-[59px] fixed top-0 z-50 left-[4rem] lg:left-[15rem] right-0 bg-[var(--bg-main)] transition-all duration-300 `}
+    >
       <div className="flex items-center justify-between">
         <div className="flex-1 mr-3">
           <InputSearch />

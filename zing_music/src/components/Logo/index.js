@@ -1,10 +1,2 @@
-export default function Logo() {
-  return (
-    <div>
-      <img
-        className="w-[120px]"
-        src="https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/backgrounds/logo-dark.svg"
-      />
-    </div>
-  );
-}
+export { default as LogoFull } from "./LogoFull";
+export { default as LogoMedium } from "./LogoMedium";

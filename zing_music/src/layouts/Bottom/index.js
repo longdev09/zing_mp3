@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   FaBackwardStep,
+  FaBars,
   FaClone,
   FaEllipsis,
   FaForwardStep,
@@ -26,7 +27,7 @@ import {
 import Volume from "../../components/Volume";
 import TimeMusic from "../../components/TimeMusic";
 
-export default function Bottom({ handleNotify }) {
+export default function Bottom({ handleNotify, onPlaylist }) {
   const { playList, listRelease, isPlay, song, randomSong } = useSelector(
     (state) => state.musicPlay
   );
@@ -167,6 +168,12 @@ export default function Bottom({ handleNotify }) {
           </Button>
           <div className="flex items-center">
             <Volume />
+          </div>
+
+          {/* nav bar playlist */}
+
+          <div onClick={onPlaylist} className="ml-4 cursor-pointer">
+            <FaBars />
           </div>
         </div>
       </div>

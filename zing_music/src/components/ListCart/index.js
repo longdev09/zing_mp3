@@ -14,7 +14,20 @@ export default function ListCart({ title, viewAll, data }) {
         </h2>
       </div>
       <div className="mt-5">
-        <Swiper spaceBetween={5} slidesPerView={5}>
+        <Swiper
+          spaceBetween={5}
+          slidesPerView={2}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1024: { slidesPerView: 4 },
+            1280: { slidesPerView: 5 },
+          }}
+        >
           {data?.slice(0, 5).map((item, index) => (
             <SwiperSlide key={index}>
               <Cart

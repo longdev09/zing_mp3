@@ -4,7 +4,9 @@ import { useFetch, useReadLrc } from "../../../hooks";
 
 export default function ContentLyric() {
   const { song } = useSelector((state) => state.musicPlay);
-  const { currentTime } = useSelector((state) => state.currentTime);
+  const { currentTime, currentTimeLyric } = useSelector(
+    (state) => state.currentTime
+  );
   const [file, setFile] = useState(null);
   const [newlyric, setLyric] = useState(null);
 
@@ -22,8 +24,8 @@ export default function ContentLyric() {
   useEffect(() => {
     const currentIndex = lyrics?.findIndex(
       (item, index) =>
-        item.time <= Math.floor(currentTime) &&
-        (lyrics[index + 1]?.time > Math.floor(currentTime) ||
+        item.time <= Math.floor(currentTimeLyric) &&
+        (lyrics[index + 1]?.time > Math.floor(currentTimeLyric) ||
           !lyrics[index + 1])
     );
 
@@ -33,41 +35,28 @@ export default function ContentLyric() {
         return {
           ...item,
           active: isActive,
-          past: !isActive && item.time < Math.floor(currentTime),
+          past: !isActive && item.time < Math.floor(currentTimeLyric),
         };
       })
     );
 
     // Cuộn đến dòng active
-  }, [currentTime, lyrics]);
+  }, [currentTimeLyric, lyrics]);
 
   return (
     <div className="w-full h-full flex flex-row items-center">
-      <div className="flex flex-col justify-center w-[41.66667%] h-full ">
+      <div className="flex flex-col justify-center  items-end w-[41.66667%] h-full pr-12">
         <div className="w-[500px]">
           <img src={song.infoSong.thumbnailM} alt="Song Thumbnail" />
         </div>
       </div>
-      <div className="flex-1 flex-col justify-center items-center h-full">
+      <div className="flex-1 flex flex-col justify-center items-center h-full">
         <ul
-          className="flex flex-col overflow-auto"
+          className="flex flex-col overflow-auto w-full"
           style={{ height: "calc(100vh - 25rem)" }}
         >
           {newlyric?.map((item, index) => (
             <LyricItem isActive={item.active} item={item} index={index} />
-            // <li
-            //   ref={itemRef}
-            //   key={index}
-            //   className={`text-[40px] font-bold py-5 ${
-            //     item.active
-            //       ? "text-yellow-300"
-            //       : item.past
-            //       ? "text-[#888888]"
-            //       : "text-white"
-            //   }`}
-            // >
-            //   {item.text}
-            // </li>
           ))}
         </ul>
       </div>

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setCurrentTime,
+  setCurrentTimeLyric,
   setSongTime,
 } from "../../redux/features/music/currentTimeSlice";
 
@@ -34,6 +35,7 @@ export default function PlayMusic({ url }) {
 
       const updateTime = () => {
         setTimeHt(audio.currentTime);
+        dispatch(setCurrentTimeLyric(audio.currentTime));
         animationFrameId = requestAnimationFrame(updateTime);
       };
 

@@ -6,10 +6,10 @@ export const currentTimeSlice = createSlice({
     currentTime: 0,
     songTime: 0,
     volume: 0,
+    currentTimeLyric: 0,
   },
   reducers: {
     setCurrentTime: (state, action) => {
-      console.log(action);
       state.currentTime = action.payload;
     },
     setSongTime: (state, action) => {
@@ -18,8 +18,11 @@ export const currentTimeSlice = createSlice({
     setVolume: (state, action) => {
       state.volume = action.payload.toFixed(1);
     },
+    setCurrentTimeLyric: (state, action) => {
+      state.currentTimeLyric = action.payload;
+    },
   },
 });
-export const { setCurrentTime, setSongTime, setVolume } =
+export const { setCurrentTime, setSongTime, setVolume, setCurrentTimeLyric } =
   currentTimeSlice.actions;
 export default currentTimeSlice.reducer;

@@ -4,16 +4,12 @@ import { useFetch, useReadLrc } from "../../../hooks";
 
 export default function ContentLyric() {
   const { song } = useSelector((state) => state.musicPlay);
-  const { currentTime, currentTimeLyric } = useSelector(
-    (state) => state.currentTime
-  );
+  const { currentTimeLyric } = useSelector((state) => state.currentTime);
   const [file, setFile] = useState(null);
   const [newlyric, setLyric] = useState(null);
 
   const { data: dataLyric } = useFetch(`/lyric/${song?.idSong}`);
   const { lyrics } = useReadLrc(file);
-
-  const itemRef = useRef();
 
   useEffect(() => {
     if (dataLyric?.file) {
@@ -45,14 +41,14 @@ export default function ContentLyric() {
 
   return (
     <div className="w-full h-full flex flex-row items-center">
-      <div className="flex flex-col justify-center  items-end w-[41.66667%] h-full pr-12">
-        <div className="w-[500px]">
+      <div className="hidden xl:flex  flex-col justify-center items-end w-[41.66667%] h-full pr-12">
+        <div className="w-[500px] max-w-[80%] ">
           <img src={song.infoSong.thumbnailM} alt="Song Thumbnail" />
         </div>
       </div>
-      <div className="flex-1 flex flex-col justify-center items-center h-full">
+      <div className="flex-1 flex flex-col justify-center items-center h-full text-center xl:text-left">
         <ul
-          className="flex flex-col overflow-auto w-full"
+          className="flex flex-col overflow-auto w-full "
           style={{ height: "calc(100vh - 25rem)" }}
         >
           {newlyric?.map((item, index) => (

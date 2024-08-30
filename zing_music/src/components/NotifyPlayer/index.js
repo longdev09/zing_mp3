@@ -6,10 +6,7 @@ import ContentLyric from "./ContentLyric";
 import ContentPlayList from "./ContentPlayList";
 export default function NotifyPlayer({ open }) {
   const [conten, setContent] = useState("1");
-  const { playList, listRelease } = useSelector((state) => state.musicPlay);
-
-  const list = playList?.song?.items || listRelease;
-  // Tính toán giá trị initialSlide
+  const { song } = useSelector((state) => state.musicPlay);
 
   const handleContent = (data) => {
     setContent(data);
@@ -17,27 +14,35 @@ export default function NotifyPlayer({ open }) {
 
   return (
     <div
-      className={`${
-        open ? "h-full" : "h-0"
-      } fixed w-full bottom-0  duration-700 z-50 transition-all overflow-hidden`}
+      className={`fixed w-full z-10 left-0 bottom-0 overflow-hidden transition-all duration-500 ${
+        open ? "translate-y-0" : "translate-y-full"
+      }`}
+      style={{ top: "0px" }} /* Đảm bảo phần tử nằm ở top của màn hình */
     >
-      <div className="absolute top-0 left-0 bottom-0 h-full w-full">
-        <img
-          className="scale-110 w-full h-full"
-          style={{ filter: "blur(32px)" }}
-          src="https://photo-resize-zmp3.zmdcdn.me/w360_r1x1_jpeg/avatars/7/9/9/b/799b387d346a819ece784725f7d81aa3.jpg"
-        />
+      {/* background */}
+      <div className="absolute top-0 left-0 right-0 bottom-0">
+        {/* overlay */}
+        <div className="absolute top-0 left-0 bottom-0 h-full w-full">
+          <img
+            className="scale-110 w-full h-full"
+            style={{ filter: "blur(32px)" }}
+            src={song?.infoSong?.thumbnailM}
+          />
+        </div>
+        <div className="absolute top-0 left-0 bottom-0 w-full h-full bg-[#291547cc]"></div>
       </div>
 
-      <div className="absolute top-0 left-0 bottom-0 w-full h-full bg-[#291547cc] "></div>
-
-      <div className="flex flex-col w-full h-full absolute top-0 overflow-hidden">
+      {/* content */}
+      <div
+        className="flex flex-col  h-full relative top-0"
+        style={{ height: "calc(100% - 90px)" }}
+      >
         <div className="flex-none">
           <Header sttContent={handleContent} />
         </div>
         {/* content */}
-        <div className="flex-1">
-          {conten == "1" ? <ContentPlayList list={list} /> : <ContentLyric />}
+        <div className="flex-1  flex justify-center items-center overflow-hidden">
+          {conten == "1" ? <ContentPlayList /> : <ContentLyric />}
         </div>
       </div>
     </div>

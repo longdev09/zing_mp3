@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import http from "../../../utils/http";
 import { setCurrentTime } from "./currentTimeSlice";
 
+// lay danh sach theo ma play list
 export const fetchApiPlayList = createAsyncThunk(
   "musicPlay/fetchApiPlayList",
   async ({ idList, idSong }, { dispatch, getState }) => {
@@ -54,7 +55,7 @@ export const prevSong = createAsyncThunk(
 export const musicPlaySlice = createSlice({
   name: "musicPlay",
   initialState: {
-    playList: null,
+    playList: null, // luu lai playlist dang phat
     isPlay: false,
     song: null,
     listRelease: null,
@@ -62,9 +63,10 @@ export const musicPlaySlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchApiPlayList.pending, (state) => {});
+
+    // lay play list theo id play list
     builder.addCase(fetchApiPlayList.fulfilled, (state, action) => {
-      state.playList = action.payload;
-      state.listRelease = null;
+      state.playList = action.payload.song.items;
       state.isPlay = true;
     });
 
@@ -82,7 +84,7 @@ export const musicPlaySlice = createSlice({
         list = JSON.parse(JSON.stringify(state.listRelease));
       }
       if (state.playList) {
-        list = JSON.parse(JSON.stringify(state.playList.song.items));
+        list = JSON.parse(JSON.stringify(state.playList));
       }
       const song = list.find((i) => i.encodeId == action.meta.arg);
 
@@ -102,11 +104,13 @@ export const musicPlaySlice = createSlice({
     play: (state) => {
       state.isPlay = true;
     },
+
+    // lay danh sach bai hat moi phat hanh
     setListRelease: (state, action) => {
       state.isPlay = true;
-      state.playList = null;
-      state.listRelease = action.payload;
+      state.playList = action.payload;
     },
+
     setRandomSong: (state, action) => {
       state.randomSong = action.payload;
     },

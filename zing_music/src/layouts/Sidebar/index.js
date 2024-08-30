@@ -2,12 +2,22 @@ import { memo } from "react";
 import Button from "../../components/Button";
 import { LogoFull, LogoMedium } from "../../components/Logo";
 import { MenuSideBar1, MenuSideBar2 } from "../../constant";
+import { FaX } from "../../assets/icon";
 
-function SideBar() {
+function SideBar({ openSideBar, onCloseSideBar }) {
   return (
-    <div className="hidden md:block w-[4rem] lg:w-[15rem] bg-[#231b2e] relative top-0 bottom-0 left-0 z-[30] transition-all duration-300">
-      <div className="flex flex-col">
-        <div></div>
+    <div
+      className={`${
+        openSideBar ? "w-[15rem] " : "w-0"
+      } w-0 fixed md:w-[4rem] lg:w-[15rem] bg-[#231b2e] md:relative top-0 bottom-0 left-0 z-[56] transition-all duration-300 overflow-hidden`}
+    >
+      <div
+        onClick={onCloseSideBar}
+        className="flex md:hidden justify-end px-4 py-3 cursor-pointer"
+      >
+        <FaX className="text-xl text-white" />
+      </div>
+      <div className={` flex flex-col`}>
         <div className=" h-[70px] flex items-center justify-center lg:justify-normal">
           {/* Show LogoFull on screens larger than 1024px */}
           <div className="hidden lg:block px-7">
@@ -26,7 +36,11 @@ function SideBar() {
             >
               <a className="flex items-center  ">
                 <span>{item.icon}</span>
-                <span className="ml-3 hover:text-white hidden lg:block  transition duration-300">
+                <span
+                  className={`${
+                    openSideBar ? "!block" : "!hidden"
+                  } ml-3 hover:text-white hidden lg:!block  transition duration-300`}
+                >
                   {item.name}
                 </span>
               </a>
@@ -44,7 +58,11 @@ function SideBar() {
             >
               <a className="flex items-center  ">
                 <span>{item.icon}</span>
-                <span className="ml-3 hover:text-white  hidden lg:block  ">
+                <span
+                  className={`${
+                    openSideBar ? "!block" : "!hidden"
+                  } ml-3 hover:text-white hidden lg:!block  transition duration-300`}
+                >
                   {item.name}
                 </span>
               </a>

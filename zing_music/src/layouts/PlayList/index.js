@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 
 export default function PlayList({ openPlayList }) {
   const { playList, listRelease } = useSelector((state) => state.musicPlay);
-  console.log(openPlayList);
+  console.log(playList);
   return (
     <div
       style={{ height: "calc(100vh - 90px)" }}
-      className={`bg-[var(--bg-main)] w-[22rem] fixed top-0 right-0 z-[99] 2xl:relative border-l border-[#ffffff1a] transition-all duration-300 ${
+      className={`bg-[var(--bg-main)] w-0 fixed top-0 right-0 z-[99] 2xl:relative border-l border-[#ffffff1a] transition-all duration-300 ${
         openPlayList ? "w-[22rem]" : "w-0"
       }`}
     >
@@ -34,25 +34,16 @@ export default function PlayList({ openPlayList }) {
         </div>
         {/* play list */}
         <div className="px-2 overflow-auto ">
-          {playList
-            ? playList?.song?.items.map((item, index) => (
-                <Item
-                  key={index}
-                  thumbnail={item.thumbnail}
-                  title={item.title}
-                  idSong={item?.encodeId}
-                  artists={item.artists}
-                />
-              ))
-            : listRelease?.map((item, index) => (
-                <Item
-                  key={index}
-                  thumbnail={item.thumbnail}
-                  title={item.title}
-                  idSong={item?.encodeId}
-                  artists={item.artists}
-                />
-              ))}
+          {playList &&
+            playList?.map((item, index) => (
+              <Item
+                key={index}
+                thumbnail={item.thumbnail}
+                title={item.title}
+                idSong={item?.encodeId}
+                artists={item.artists}
+              />
+            ))}
         </div>
       </div>
     </div>

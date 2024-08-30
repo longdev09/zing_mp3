@@ -11,9 +11,9 @@
   --text-pink: #a966cf;
   --text-purple: #9b4de0;
   --text-sub: #ffffff80;
-  
   --bg-bottom:  #130c1c;
   --h-bottom: 90px;
+  --h-bottom-mobile: 60px;
  
 }
 
@@ -29,8 +29,14 @@
     -webkit-text-stroke: 1px #fff;
     color: transparent; /* Optional: If you want only the stroke to be visible */
   }
+
+  .transform-custom {
+    transform: translate(35px, -35px) scale(1.21212);
+  }
   
 }
+
+
 
 body {
   overflow: hidden;
@@ -108,3 +114,5 @@ img {
 .swiper-button-next::after{
   font-size:  14px !important;
 }
+
+

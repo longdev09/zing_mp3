@@ -19,7 +19,9 @@ import {
   faChevronDown,
   faUpRightAndDownLeftFromCenter,
   faVolumeXmark,
-  faBars
+  faBars,
+  faList,
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import iconPlaying from "../Bg/icon-playing.gif";
@@ -82,28 +84,34 @@ export const FaPlay = ({ ...props }) => (
 );
 
 export const FaStopwatch = ({ ...props }) => (
-  <FontAwesomeIcon icon={faStopwatch} />
+  <FontAwesomeIcon icon={faStopwatch} {...props} />
 );
 
 export const FaChevronDown = ({ ...props }) => (
-  <FontAwesomeIcon icon={faChevronDown} />
+  <FontAwesomeIcon icon={faChevronDown} {...props} />
 );
 
 export const FaUpRightAndDownLeftFromCenter = ({ ...props }) => (
-  <FontAwesomeIcon icon={faUpRightAndDownLeftFromCenter} />
+  <FontAwesomeIcon icon={faUpRightAndDownLeftFromCenter} {...props} />
 );
 
 export const FaVolumeXmark = ({ ...props }) => (
-  <FontAwesomeIcon icon={faVolumeXmark} />
+  <FontAwesomeIcon icon={faVolumeXmark} {...props} />
 );
 
 export const FaBars = ({ ...props }) => (
-  <FontAwesomeIcon icon={faBars} />
+  <FontAwesomeIcon icon={faBars} {...props} />
 );
 
+export const FaList = ({ ...props }) => (
+  <FontAwesomeIcon icon={faList} {...props} />
+);
 
+export const FaPause = ({ ...props }) => (
+  <FontAwesomeIcon icon={faPause} {...props} />
+);
 
-export const FaPause = ({ ...props }) => <FontAwesomeIcon icon={faPause} />;
+export const FaX = ({ ...props }) => <FontAwesomeIcon icon={faX} {...props} />;
 
 export const IconLibrary = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">

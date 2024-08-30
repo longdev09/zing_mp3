@@ -24,7 +24,7 @@ export default function TimeMusic() {
         const newTime = prevTime + 0.1;
         if (newTime >= songTime) {
           if (playList) {
-            dispatch(nextSong(playList.song.items));
+            dispatch(nextSong(playList));
           } else {
             dispatch(nextSong(listRelease));
           }
@@ -50,26 +50,21 @@ export default function TimeMusic() {
   };
 
   return (
-    <div className="flex items-center mt-2 cursor-pointer">
+    <div className="flex items-center py-1 cursor-pointer">
       <span className="text-[var(--text-sub)] text-sm mr-2">
         {useConverTime(time)}
       </span>
-      <div className="flex relative w-full h-[5px] bg-[#5a5560] rounded-lg group hover:h-[7px] transition duration-300">
-        <input
-          value={songTime === 0 ? 0 : Math.floor((time / songTime) * 100)}
-          type="range"
-          name="range"
-          min="0"
-          max="100"
-          className="bg-none w-full"
-          onChange={handleSeek} // Bắt sự kiện khi người dùng kéo thanh trượt
-          onMouseUp={handleSeekEnd} // Gửi cập nhật khi người dùng thả chuột
-          onTouchEnd={handleSeekEnd} // Gửi cập nhật khi người dùng thả tay (trên thiết bị cảm ứng)
-        />
-        {/* <div className="bg-white absolute w-[600px] h-[5px] rounded-lg group-hover:h-[7px] transition duration-300">
-        <div className="hidden group-hover:block absolute w-[12px] h-[12px] bg-white rounded-full translate-x-[590px] translate-y-[-3px]"></div>
-      </div> */}
-      </div>
+      <input
+        value={songTime === 0 ? 0 : Math.floor((time / songTime) * 100)}
+        type="range"
+        name="range"
+        min="0"
+        max="100"
+        className="!bg-yellow-300 w-full"
+        onChange={handleSeek} // Bắt sự kiện khi người dùng kéo thanh trượt
+        onMouseUp={handleSeekEnd} // Gửi cập nhật khi người dùng thả chuột
+        onTouchEnd={handleSeekEnd} // Gửi cập nhật khi người dùng thả tay (trên thiết bị cảm ứng)
+      />
       <span className="text-[var(--text-sub)] text-sm ml-2">
         {useConverTime(songTime)}
       </span>

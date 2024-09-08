@@ -4,10 +4,8 @@ import { useEffect, useState } from "react";
 import { setCurrentTime } from "../../redux/features/music/currentTimeSlice";
 import { nextSong } from "../../redux/features/music/musicPlaySlice";
 export default function TimeMusic() {
-  const { currentTime, songTime } = useSelector((state) => state.currentTime);
-  const { isPlay, song, playList, listRelease } = useSelector(
-    (state) => state.musicPlay
-  );
+  const { songTime } = useSelector((state) => state.currentTime);
+  const { isPlay, song, playList } = useSelector((state) => state.musicPlay);
   const dispatch = useDispatch();
   const [time, setTime] = useState(0);
 
@@ -18,16 +16,11 @@ export default function TimeMusic() {
 
   useEffect(() => {
     if (!isPlay) return;
-
     const timerInterval = setInterval(() => {
       setTime((prevTime) => {
         const newTime = prevTime + 0.1;
-        if (newTime >= songTime) {
-          if (playList) {
-            dispatch(nextSong(playList));
-          } else {
-            dispatch(nextSong(listRelease));
-          }
+        if (newTime >= songTime && songTime != 0) {
+          dispatch(nextSong(playList));
           clearInterval(timerInterval); // Dừng bộ đếm nếu thời gian vượt quá thời gian bài hát
           return songTime; // Đảm bảo thời gian không vượt quá songTime
         }
@@ -45,6 +38,7 @@ export default function TimeMusic() {
     setTime(newTime);
   };
 
+  // xu ly khi tua bai hat
   const handleSeekEnd = () => {
     dispatch(setCurrentTime(time));
   };

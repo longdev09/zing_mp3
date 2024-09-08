@@ -8,6 +8,7 @@ import {
   IconPlaying,
   IconPremium,
 } from "../../assets/icon";
+import { useShowName } from "../../hooks";
 import { pause, play } from "../../redux/features/music/musicPlaySlice";
 export default function CartHorzontal({
   encodeId,
@@ -20,15 +21,15 @@ export default function CartHorzontal({
 }) {
   const { song, isPlay } = useSelector((state) => state.musicPlay);
   const dispatch = useDispatch();
+
   const handlePlause = () => {
     dispatch(pause());
   };
   const handlePlay = () => {
     dispatch(play());
   };
-
   return (
-    <div className="p-2 group cursor-pointer hover:bg-[#feffff1a] rounded-md transition duration-300 ">
+    <div className="flex-1 p-2 group cursor-pointer hover:bg-[#feffff1a] rounded-md transition duration-300 ">
       <div className="flex items-center flex-row ">
         <div className="w-[60px] h-[60px] relative ">
           <img className="rounded-md group-hover:opacity-75" src={thumbnail} />
@@ -66,12 +67,12 @@ export default function CartHorzontal({
           </div>
 
           <div className="line-clamp-1">
-            {artists?.map((item, index) => (
+            {useShowName(artists)?.map((item, index) => (
               <Link
                 key={index}
                 className="text-xs text-[var(--text-sub)] mt-[3px] hover:text-[var(--text-pink)] hover:underline"
               >
-                {item.name + ", "}
+                {item}
               </Link>
             ))}
           </div>

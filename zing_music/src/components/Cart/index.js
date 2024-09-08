@@ -35,13 +35,14 @@ function Cart({ thumbnail, nameSong, artists, idList }) {
     dispatch(play());
   };
 
+  console.log(playList);
   return (
     <div className=" px-2 ">
       <div className="w-full overflow-hidden group cursor-pointer rounded-lg">
         <div className=" relative">
           <img
             className={`rounded-lg w-full h-full group-hover:scale-110 ${
-              playList?.encodeId == idList
+              playList?.idPlayList == idList
                 ? "opacity-75"
                 : "group-hover:opacity-75"
             }  transition duration-500`}
@@ -49,13 +50,14 @@ function Cart({ thumbnail, nameSong, artists, idList }) {
           />
           <div
             className={`absolute top-[50%] left-0 right-0 bottom-auto translate-x-(-50%) translate-y-[-50%] ${
-              playList?.encodeId == idList ? "opacity-100" : "opacity-0"
+              playList?.idPlayList == idList ? "opacity-100" : "opacity-0"
             } group-hover:opacity-100 transition duration-300`}
           >
             <div className="text-white flex flex-row justify-around items-center px-3">
               <FaHeart className="text-2xl" />
               <div className="w-[40px] h-[40px] flex items-center justify-center rounded-full border">
-                {playList?.encodeId == idList && playList?.encodeId != null ? (
+                {playList?.idPlayList == idList &&
+                playList?.idPlayList != null ? (
                   isPlay ? (
                     <IconPlaying onClick={handlePlause} />
                   ) : (

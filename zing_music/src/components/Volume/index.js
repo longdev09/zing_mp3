@@ -7,7 +7,7 @@ import debounce from "lodash.debounce";
 
 export default function Volume() {
   const dispatch = useDispatch();
-  const [volume, _setVolume] = useState(0); // Mức âm lượng ban đầu là 0%
+  const [volume, _setVolume] = useState(50); // Mức âm lượng ban đầu là 0%
 
   const handleVolumeChange = (newVolume) => {
     if (newVolume < 0) newVolume = 0;
@@ -58,12 +58,12 @@ export default function Volume() {
             width: "100%", // Đảm bảo phần tử bao phủ toàn bộ chiều rộng của thanh
           }}
         >
-          <div
+          {/* <div
             className="absolute left-0 right-0 w-[10px] h-[10px] bg-white rounded-full"
             style={{
               transform: `translate(${(volume / 100) * 70}px, -3px)`,
             }}
-          ></div>
+          ></div> */}
         </div>
       </div>
     </>

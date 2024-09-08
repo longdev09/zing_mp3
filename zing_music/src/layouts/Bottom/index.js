@@ -17,70 +17,61 @@ import {
 } from "../../components/Control";
 import TimeMusic from "../../components/TimeMusic";
 import Volume from "../../components/Volume";
+import { MyContext } from "..";
+import { useContext } from "react";
+import ControlRandom from "../../components/Control/ControlRandom";
+import Test from "../../components/Test";
+export default function Bottom({ onPlaylist }) {
+  const { handleNotify, openNotifly } = useContext(MyContext);
 
-export default function Bottom({ handleNotify, onPlaylist, openNoti }) {
   const { playList, listRelease, isPlay, song } = useSelector(
     (state) => state.musicPlay
   );
-
+  console.log(song);
   return (
     <div
       className={`fixed z-[99] w-full bottom-0 select-none ${
-        openNoti ? "bg-[transparent]" : "bg-[var(--bg-bottom)]"
+        openNotifly ? "bg-[transparent]" : "bg-[var(--bg-bottom)]"
       } `}
     >
       <div
         className={`flex items-center h-[--h-bottom] px-5 ${
-          openNoti ? "justify-center" : "justify-between"
+          openNotifly ? "justify-center" : "justify-between"
         }`}
       >
         <div
-          className={`${openNoti ? "hidden" : "flex"}  items-center w-[30%]`}
+          className={`${openNotifly ? "hidden" : "flex"}  items-center w-[30%]`}
         >
           <img
             className="w-[64px] rounded-lg"
             src={
-              playList
-                ? playList?.find((item) => item.encodeId === song.idSong)
-                    ?.thumbnail
-                : listRelease?.find((item) => item.encodeId === song.idSong)
-                    ?.thumbnail
+              playList &&
+              playList?.itemSong?.find((item) => item.encodeId === song.idSong)
+                ?.thumbnail
             }
           />
           <div className="flex flex-col ml-3">
             <span className="text-sm font-bold text-white line-clamp-1">
-              {playList
-                ? playList?.find((item) => item.encodeId === song.idSong)?.title
-                : listRelease?.find((item) => item.encodeId === song.idSong)
-                    ?.title}
+              {playList &&
+                playList?.itemSong?.find(
+                  (item) => item.encodeId === song.idSong
+                )?.title}
             </span>
 
             <div className="mt-1 font-bold text-[--text-sub] text-xs line-clamp-1">
-              {playList
-                ? playList
-                    .find((item) => item.encodeId === song.idSong)
-                    ?.artists?.map((item, index) => (
-                      <Link
-                        key={index}
-                        className="text-xs text-[var(--text-sub)] mt-[3px] hover:text-[var(--text-pink)] hover:underline"
-                      >
-                        <span className="text-xs text-[var(--text-sub)] mt-[3px]">
-                          {item.name + ", "}
-                        </span>
-                      </Link>
-                    ))
-                : listRelease
-                    ?.find((item) => item.encodeId === song.idSong)
-                    ?.artists?.map((item, index) => (
-                      <Link
-                        key={index}
-                        className="text-xs text-[var(--text-sub)] mt-[3px] hover:text-[var(--text-pink)] hover:underline"
-                      >
-                        <span className="text-xs text-[var(--text-sub)] mt-[3px]">
-                          {item.name + ", "}
-                        </span>
-                      </Link>
-                    ))}
+              {playList &&
+                playList?.itemSong
+                  ?.find((item) => item.encodeId === song.idSong)
+                  ?.artists?.map((item, index) => (
+                    <Link
+                      key={index}
+                      className="text-xs text-[var(--text-sub)] mt-[3px] hover:text-[var(--text-pink)] hover:underline"
+                    >
+                      <span className="text-xs text-[var(--text-sub)] mt-[3px]">
+                        {item.name + ", "}
+                      </span>
+                    </Link>
+                  ))}
             </div>
           </div>
           <div className="flex text-white ml-6">
@@ -90,11 +81,12 @@ export default function Bottom({ handleNotify, onPlaylist, openNoti }) {
         </div>
 
         <div
-          className={`flex-grow max-w-[40vw] flex ${
-            openNoti ? "flex-col-reverse" : "flex-col"
+          className={`flex-grow xl:max-w-[40vw] flex ${
+            openNotifly ? "flex-col-reverse" : "flex-col"
           }`}
         >
           <div className="flex items-center justify-center ">
+            <ControlRandom />
             <ControlPrev />
             <div className="w-[40px] h-[40px] flex items-center justify-center rounded-full border">
               {isPlay ? <ControlPause /> : <ControlPlay />}
@@ -106,7 +98,7 @@ export default function Bottom({ handleNotify, onPlaylist, openNoti }) {
 
         <div
           className={`${
-            openNoti ? "hidden" : "flex"
+            openNotifly ? "hidden" : "flex"
           } w-[30%] text-white  items-center  justify-end`}
         >
           <Button onclick={handleNotify} className="!text-lg mx-4">

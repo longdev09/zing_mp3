@@ -4,8 +4,8 @@ import Item from "./Item";
 import { useSelector } from "react-redux";
 
 export default function PlayList({ openPlayList }) {
-  const { playList, listRelease } = useSelector((state) => state.musicPlay);
-  console.log(playList);
+  const { playList } = useSelector((state) => state.musicPlay);
+  console.log("playList", playList);
   return (
     <div
       style={{ height: "calc(100vh - 90px)" }}
@@ -35,13 +35,14 @@ export default function PlayList({ openPlayList }) {
         {/* play list */}
         <div className="px-2 overflow-auto ">
           {playList &&
-            playList?.map((item, index) => (
+            playList?.itemSong?.map((item, index) => (
               <Item
                 key={index}
                 thumbnail={item.thumbnail}
                 title={item.title}
                 idSong={item?.encodeId}
                 artists={item.artists}
+                previewInfo={item.previewInfo}
               />
             ))}
         </div>

@@ -13,7 +13,7 @@ export default function ContentPlayList() {
   const { playList, song } = useSelector((state) => state.musicPlay);
 
   const initialSlide =
-    playList?.findIndex((i) => i.encodeId === song.idSong) ?? 0;
+    playList?.itemSong?.findIndex((i) => i.encodeId === song.idSong) ?? 0;
 
   const [swiperRef, setSwiperRef] = useState(null);
 
@@ -33,19 +33,25 @@ export default function ContentPlayList() {
   return (
     <div className="h-full w-full flex justify-center items-center">
       <Swiper
+        navigation={true} // Thêm navigation vào Swiper
         modules={[Virtual, Navigation, Pagination]}
         initialSlide={initialSlide}
         spaceBetween={40}
-        slidesPerView={3}
+        slidesPerView={2}
         centeredSlides={true}
         onSwiper={setSwiperRef}
-        // className="h-3/4 w-full"
         breakpoints={{
+          640: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
           1024: { slidesPerView: 4 },
           1280: { slidesPerView: 5 },
         }}
       >
-        {playList?.map((item, index) => (
+        {playList?.itemSong.map((item, index) => (
           <SwiperSlide key={item.encodeId} virtualIndex={index}>
             <ItemSong
               idSong={item.encodeId}

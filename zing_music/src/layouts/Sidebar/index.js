@@ -9,7 +9,7 @@ function SideBar({ openSideBar, onCloseSideBar }) {
     <div
       className={`${
         openSideBar ? "w-[15rem] " : "w-0"
-      } w-0 fixed md:w-[4rem] lg:w-[15rem] bg-[#231b2e] md:relative top-0 bottom-0 left-0 z-[56] transition-all duration-300 overflow-hidden`}
+      }  w-0 fixed md:w-[4rem] lg:w-[15rem] bg-[#231b2e] md:relative top-0 bottom-0 left-0 z-[56] transition-all duration-300 overflow-hidden`}
     >
       <div
         onClick={onCloseSideBar}

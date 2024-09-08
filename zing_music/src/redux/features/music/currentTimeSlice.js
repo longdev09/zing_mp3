@@ -5,7 +5,7 @@ export const currentTimeSlice = createSlice({
   initialState: {
     currentTime: 0,
     songTime: 0,
-    volume: 0,
+    volume: 50,
     currentTimeLyric: 0,
   },
   reducers: {

@@ -6,16 +6,22 @@ import {
   FaPlay,
   IconLoading,
   IconPlaying,
+  IconPremium,
 } from "../../../assets/icon";
 import {
   fetchApiGetSong,
   pause,
   play,
 } from "../../../redux/features/music/musicPlaySlice";
-export default function Item({ thumbnail, title, idSong, artists }) {
-  const { isPlay, song, listRelease, playList } = useSelector(
-    (state) => state.musicPlay
-  );
+export default function Item({
+  thumbnail,
+  title,
+  idSong,
+  artists,
+  previewInfo,
+}) {
+  const { isPlay, song } = useSelector((state) => state.musicPlay);
+
   const dispatch = useDispatch();
   const handleGetSong = () => {
     if (idSong == song?.idSong) {
@@ -60,9 +66,12 @@ export default function Item({ thumbnail, title, idSong, artists }) {
         </div>
 
         <div className="flex flex-col justify-center cursor-pointer ml-3  flex-1">
-          <span className="text-sm text-white font-bold hover:text-[var(--text-pink)] line-clamp-1 ">
-            {title}
-          </span>
+          <div className="flex items-center">
+            <span className="text-sm text-white font-bold hover:text-[var(--text-pink)] line-clamp-1  mr-3 ">
+              {title}
+            </span>
+            {previewInfo ? <IconPremium /> : ""}
+          </div>
           <div className="line-clamp-1">
             {artists?.map((item, index) => (
               <Link

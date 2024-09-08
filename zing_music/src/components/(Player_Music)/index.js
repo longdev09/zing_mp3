@@ -15,7 +15,6 @@ export default function PlayMusic({ url }) {
 
   const { isPlay } = useSelector((state) => state.musicPlay);
   const [timeht, setTimeHt] = useState(0);
-
   useEffect(() => {
     const audio = audioRef.current;
     if (audio) {
@@ -35,7 +34,7 @@ export default function PlayMusic({ url }) {
 
       const updateTime = () => {
         setTimeHt(audio.currentTime);
-        dispatch(setCurrentTimeLyric(audio.currentTime));
+        dispatch(setCurrentTimeLyric(audio.currentTime)); // dung de su ly cai lyric
         animationFrameId = requestAnimationFrame(updateTime);
       };
 
@@ -47,6 +46,7 @@ export default function PlayMusic({ url }) {
       }
       if (!isPlay) {
         audio.pause();
+
         dispatch(setCurrentTime(timeht));
         cancelAnimationFrame(animationFrameId);
       }

@@ -5,10 +5,10 @@ import { publicRoutes } from "./routes";
 import PlayMusic from "./components/(Player_Music)";
 import { useSelector } from "react-redux";
 function App() {
-  const { isPlay, song } = useSelector((state) => state.musicPlay);
+  const { song } = useSelector((state) => state.musicPlay);
 
   return (
-    <div className="bg-[var(--bg-main)]">
+    <div className="bg-[var(--bg-main)] h-[100vh]">
       <BrowserRouter>
         <Routes>
           {publicRoutes.map((item, index) => {
@@ -28,7 +28,7 @@ function App() {
           })}
         </Routes>
       </BrowserRouter>
-      <PlayMusic url={song?.url?.["128"]} />
+      <PlayMusic url={song?.url} />
     </div>
   );
 }

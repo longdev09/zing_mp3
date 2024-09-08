@@ -43,7 +43,7 @@ export default function ContentLyric() {
     <div className="w-full h-full flex flex-row items-center">
       <div className="hidden xl:flex  flex-col justify-center items-end w-[41.66667%] h-full pr-12">
         <div className="w-[500px] max-w-[80%] ">
-          <img src={song.infoSong.thumbnailM} alt="Song Thumbnail" />
+          <img src={song?.infoSong?.thumbnailM} alt="Song Thumbnail" />
         </div>
       </div>
       <div className="flex-1 flex flex-col justify-center items-center h-full text-center xl:text-left">
@@ -74,7 +74,7 @@ function LyricItem({ isActive, index, item }) {
     <li
       ref={itemRef}
       key={index}
-      className={`text-[40px] font-bold py-5 ${
+      className={`text-[23px] md:text-[40px] font-bold py-5 ${
         item.active
           ? "text-yellow-300"
           : item.past

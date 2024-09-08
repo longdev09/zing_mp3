@@ -16,14 +16,11 @@ export default function Home() {
       {dataHome?.items.map((item) => {
         const sectionComponents = {
           banner: <ListBanner data={item.items} />,
-          "new-release": <ListNewSong data={item.items} />,
+          "new-release": <ListNewSong title={item.title} data={item.items} />,
           playlist: (
             <ListCart title={item.title} data={item.items} viewAll={true} />
           ),
           newReleaseChart: <ListRank title={item.title} data={item.items} />,
-          RTChart: "RTChart",
-          weekChart: <ListWeekChart data={item.items} />,
-          livestream: "livestream",
         };
 
         return sectionComponents[item.sectionType] || "";

@@ -57,7 +57,7 @@ export default function Layout({ children }) {
               <Bottom onPlaylist={handlePlayList} />
             </div>
             <div className="block lg:hidden">
-              <BottomMobile />
+              <BottomMobile onPlaylist={handlePlayList} />
             </div>
           </div>
         </div>

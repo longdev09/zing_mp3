@@ -194,6 +194,28 @@ app.get('/api/weekChart/:id', async (req, res) => {
     }
 });
 
+
+
+
+
+
+
+
+///// Cac api tu viet
+
+// dang nhap 
+
+
+
+
+
+
+
+
+
+
+
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

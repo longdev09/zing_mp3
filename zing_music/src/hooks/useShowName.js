@@ -7,6 +7,6 @@ const useShowName = (nameList) => {
     });
   }, [nameList]);
 
-  return formattedNames;
+  return { formattedNames };
 };
 export default useShowName;

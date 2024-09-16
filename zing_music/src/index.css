@@ -5,36 +5,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-:root{
-  --h-header: 70px;
-  --bg-main: #170f23;
-  --text-pink: #a966cf;
-  --text-purple: #9b4de0;
-  --text-sub: #ffffff80;
-  --bg-bottom:  #130c1c;
-  --h-bottom: 90px;
-  --h-bottom-mobile: 60px;
- 
-}
-
-
-@layer utilities {
-
-
-  .custom-text-stroke {
-    -webkit-text-stroke: 1px #4a90e2;
-    color: transparent; /* Optional: If you want only the stroke to be visible */
-  }
-  .custom-text-stroke {
-    -webkit-text-stroke: 1px #fff;
-    color: transparent; /* Optional: If you want only the stroke to be visible */
-  }
-
-  .transform-custom {
-    transform: translate(35px, -35px) scale(1.21212);
-  }
-  
-}
 
 
 *{
@@ -65,6 +35,94 @@ img {
   width: 100%;
   height: 100%;
 }
+
+
+/* mau */
+:root{
+  --h-header: 70px;
+  --bg-main: #170f23;
+  --text-pink: #a966cf;
+  --text-purple: #9b4de0;
+  --text-sub: #ffffff80;
+  --bg-bottom:  #130c1c;
+  --h-bottom: 90px;
+  --h-bottom-mobile: 60px;
+
+  --h-sider-bar:270px;
+  --pd-content: 20px;
+
+  --bg-wrap:#5b606025;
+
+
+  /*  */
+  --color-main-page: #1F1F1F;
+  --color-extra: #0F0F0F;
+
+  /* pink */
+
+
+  --color-pink-normal: #EE10B0;
+  --color-pink-normal-hover: #D60E9E;
+  --color-pink-normal-active: #BE0D8D;
+
+  --color-pink-dark: #B30C84;
+  --color-pink-dark-hover: #8F0A6A;
+  --color-pink-dark-active: #6B074F;
+
+  --color-pink-darker: #53063E;
+
+  /* blue */
+
+  --color-blue-normal : #0E9EEF;
+  --color-blue-normal-hover: #0D8ED7;
+  --color-blue-normal-active: #0B7EBF;
+  --color-blue-dark : #0B77B3;
+  --color-blue-dark-hover: #085F8F;
+  --color-blue-dark-active: #06476C;
+  --color-blue-darker: #053754;
+  
+
+ 
+}
+
+
+@layer utilities {
+  .custom-text-stroke {
+    -webkit-text-stroke: 1px #4a90e2;
+    color: transparent; /* Optional: If you want only the stroke to be visible */
+  }
+  .custom-text-stroke {
+    -webkit-text-stroke: 1px #fff;
+    color: transparent; /* Optional: If you want only the stroke to be visible */
+  }
+
+  .transform-custom {
+    transform: translate(35px, -35px) scale(1.21212);
+  }
+
+
+
+
+  .hover-pink-normal {
+    @apply hover:text-[var(--color-pink-normal-hover)];
+  }
+
+
+  .hover-bg-pink-dark{
+    @apply hover:bg-[var(--color-pink-dark-hover)];
+  }
+
+ 
+  
+  
+  
+}
+
+
+
+
+
+
 
 /* @keyframes slide-up {
   from {

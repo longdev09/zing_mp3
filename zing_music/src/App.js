@@ -8,7 +8,7 @@ function App() {
   const { song } = useSelector((state) => state.musicPlay);
 
   return (
-    <div className="bg-[var(--bg-main)] h-[100vh]">
+    <div className="bg-[var(--color-main-page)] h-[100vh]">
       <BrowserRouter>
         <Routes>
           {publicRoutes.map((item, index) => {
@@ -28,6 +28,7 @@ function App() {
           })}
         </Routes>
       </BrowserRouter>
+
       <PlayMusic url={song?.url} />
     </div>
   );

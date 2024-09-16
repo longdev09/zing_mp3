@@ -2,14 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import http from "../../../utils/http";
 import { setCurrentTime } from "./currentTimeSlice";
 
-// lay danh sach theo ma play list
+// Lấy danh sách bài hát theo mã playlist
+
 export const fetchApiPlayList = createAsyncThunk(
   "musicPlay/fetchApiPlayList",
   async ({ idList }, { dispatch }) => {
     const response = await http.get(`playlist/${idList}`);
     const res = response.data.data?.song?.items;
-    dispatch(fetchApiGetSong(res?.[0]?.encodeId));
-    dispatch(setCurrentTime(0));
+    dispatch(fetchApiGetSong(res?.[0]?.encodeId)); // lấy ra bài hát đầu tiên trong playList
     return response.data.data;
   }
 );
@@ -20,10 +20,9 @@ export const fetchApiGetSong = createAsyncThunk(
     const response = await http.get(`song/${idSong}`);
     if (response.data.msg == "Success") {
       dispatch(setCurrentTime(0));
-
       return response.data.data["128"];
     } else {
-      const response = await http.get(`songPremium/${idSong}`);
+      const response = await http.get(`songPremium/${idSong}`); // lấy bài hát priemium
       dispatch(setCurrentTime(0));
       return response.data.data.link;
     }
@@ -38,7 +37,6 @@ export const nextSong = createAsyncThunk(
     const indexSong = getState().musicPlay.playList.itemSong.findIndex(
       (i) => i.encodeId == idSong
     );
-
     dispatch(
       fetchApiGetSong(
         getState().musicPlay.playList.itemSong[indexSong + 1].encodeId
@@ -66,15 +64,13 @@ export const prevSong = createAsyncThunk(
 export const musicPlaySlice = createSlice({
   name: "musicPlay",
   initialState: {
-    playList: null, // luu lai playlist dang phat
+    playList: null, // bien dung cho toan bo cac loai playList
     isPlay: false,
     song: null,
-
     randomSong: false,
+    loadingSong: false,
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchApiPlayList.pending, (state) => {});
-
     // lay play list theo id play list
     builder.addCase(fetchApiPlayList.fulfilled, (state, action) => {
       state.playList = {
@@ -113,8 +109,10 @@ export const musicPlaySlice = createSlice({
     play: (state) => {
       state.isPlay = true;
     },
-
-    // lay danh sach bai hat moi phat hanh
+    setLoadingSong: (state, action) => {
+      state.loadingSong = action.payload;
+    },
+    // lấy danh sach bài hát mới
     setListRelease: (state, action) => {
       state.isPlay = true;
       state.playList = {
@@ -123,7 +121,6 @@ export const musicPlaySlice = createSlice({
         idPlayList: "newSong",
       };
     },
-
     setRandomSong: (state, action) => {
       state.playList = state.playList.sort(() => Math.random() - 0.5);
       state.randomSong = action.payload;
@@ -131,6 +128,6 @@ export const musicPlaySlice = createSlice({
   },
 });
 
-export const { play, pause, setListRelease, setRandomSong } =
+export const { play, pause, setListRelease, setRandomSong, setLoadingSong } =
   musicPlaySlice.actions;
 export default musicPlaySlice.reducer;

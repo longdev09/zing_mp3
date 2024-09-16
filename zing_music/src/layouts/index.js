@@ -35,11 +35,12 @@ export default function Layout({ children }) {
       <div className="flex relative overflow-hidden h-full ">
         <SideBar openSideBar={openSideBar} onCloseSideBar={handleOpenSideBar} />
         <div
-          className="pt-20 pb-20 px-4 lg:px-[59px] flex-1 overflow-auto w-full "
+          className="pt-[var(--h-header)] pb-20 px-[var(--pd-content)] flex-1 overflow-auto w-full "
           style={{ height: "calc(100vh - 1rem)" }}
         >
           {children}
         </div>
+
         <PlayList openPlayList={openPlayList} />
       </div>
 

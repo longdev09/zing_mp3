@@ -17,7 +17,6 @@ const useFetch = (url) => {
     }
   };
   useEffect(() => {
-    console.log("hjjjjjj");
     fetchApi();
   }, [url]);
   return { data, loading, error };

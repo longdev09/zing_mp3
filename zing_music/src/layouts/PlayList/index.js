@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 export default function PlayList({ openPlayList }) {
   const { playList } = useSelector((state) => state.musicPlay);
-  console.log("playList", playList);
   return (
     <div
       style={{ height: "calc(100vh - 90px)" }}

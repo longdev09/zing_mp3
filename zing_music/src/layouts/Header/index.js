@@ -7,7 +7,7 @@ function Header({ openPlayList, onOpenSideBar }) {
     <div
       className={` ${
         openPlayList ? "2xl:right-[22rem]" : "2xl:right-0 "
-      }  h-[var(--h-header)] px-4 fixed top-0 z-50 md:left-[4rem] lg:left-[15rem] left-0 right-0 bg-[var(--bg-main)] transition-all duration-300 `}
+      }  px-[var(--pd-content)] h-[var(--h-header)] fixed top-0 z-50 md:left-[4rem] lg:left-[var(--h-sider-bar)] left-0 right-0  transition-all duration-300 `}
     >
       <div className="flex items-center justify-between">
         <div
@@ -20,10 +20,10 @@ function Header({ openPlayList, onOpenSideBar }) {
           <InputSearch />
         </div>
         <div className="flex items-center flex-none">
-          <div className="hidden md:block text-white bg-[#9b4de0] px-5 py-[10px] rounded-full font-bold text-sm mr-3 ">
+          <div className="hidden md:block text-[var(--color-pink-normal)]  px-5 py-[10px] rounded-full font-bold text-sm mr-3 border  border-[var(--color-pink-normal)]">
             Nâng cấp tài khoản
           </div>
-          <div className="hidden md:flex text-[var(--text-pink)] bg-[#2f2739] px-5 py-[10px] rounded-full font-bold text-sm  items-center  mr-3 flex-none">
+          <div className="hidden md:flex text-white bg-[var(--color-pink-normal)] px-5 py-[10px] rounded-full font-bold text-sm  items-center  mr-3 flex-none">
             <span className="mr-2">
               <FaDownload />
             </span>

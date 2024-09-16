@@ -4,7 +4,7 @@ import { useFetch } from "../../hooks";
 import ListBanner from "./ListBanner";
 import ListNewSong from "./ListNewSong";
 import ListRank from "./ListRank";
-import ListWeekChart from "./ListWeekChart";
+import bg from "../../assets/Bg/1000_F_645546712_ClV1SoTWMf2K99veh5cVx7tVQc38K6Hp 1.png";
 
 export default function Home() {
   // call api home

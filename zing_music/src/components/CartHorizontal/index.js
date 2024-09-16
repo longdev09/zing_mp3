@@ -1,5 +1,5 @@
 import moment from "moment";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   FaEllipsis,
@@ -8,9 +8,9 @@ import {
   IconPlaying,
   IconPremium,
 } from "../../assets/icon";
-import { useShowName } from "../../hooks";
-import { pause, play } from "../../redux/features/music/musicPlaySlice";
-export default function CartHorzontal({
+import { useHandleMusic, useShowName } from "../../hooks";
+import { memo } from "react";
+function CartHorzontal({
   encodeId,
   title,
   thumbnail,
@@ -19,58 +19,40 @@ export default function CartHorzontal({
   previewInfo,
   handleListRelease,
 }) {
-  const { song, isPlay } = useSelector((state) => state.musicPlay);
-  const dispatch = useDispatch();
+  const { song } = useSelector((state) => state.musicPlay);
+  const { formattedNames } = useShowName(artists && artists);
 
-  const handlePlause = () => {
-    dispatch(pause());
-  };
-  const handlePlay = () => {
-    dispatch(play());
-  };
   return (
-    <div className="flex-1 p-2 group cursor-pointer hover:bg-[#feffff1a] rounded-md transition duration-300 ">
+    <div
+      className={`flex-1 p-2 group cursor-pointer hover-bg-pink-dark bg-[var(--bg-wrap)] rounded-md transition duration-300
+        
+        ${song?.idSong == encodeId ? "bg-[var(--color-pink-normal)]" : ""}
+        `}
+    >
       <div className="flex items-center flex-row ">
+        <aa />
         <div className="w-[60px] h-[60px] relative ">
           <img className="rounded-md group-hover:opacity-75" src={thumbnail} />
-          <div
-            className={`${
-              song?.idSong == encodeId
-                ? "opacity-100"
-                : "group-hover:opacity-100"
-            } group-hover:opacity-100 transition duration-300  opacity-0 absolute top-[50%] left-0 right-0
-                bottom-auto translate-x-(-50%) translate-y-[-50%] flex justify-center`}
-          >
-            {song?.idSong == encodeId && song?.loadingSong == false ? (
-              isPlay ? (
-                <IconPlaying onClick={handlePlause} />
-              ) : (
-                <FaPlay onClick={handlePlay} className="text-white text-lg" />
-              )
-            ) : song?.loadingSong ? (
-              <IconLoading />
-            ) : (
-              <FaPlay
-                onClick={handleListRelease}
-                className="text-white text-lg"
-              />
-            )}
-          </div>
+
+          <RenderIcon
+            encodeId={encodeId}
+            handleListRelease={handleListRelease}
+          />
         </div>
 
         <div className="flex flex-col cursor-pointer ml-3  flex-1">
           <div className="flex items-center">
-            <span className="text-sm text-white font-bold hover:text-[var(--text-pink)] mr-3 line-clamp-1 ">
+            <span className="text-sm text-white font-bold mr-3 line-clamp-1 hover-pink-normal ">
               {title}
             </span>
             {previewInfo ? <IconPremium /> : ""}
           </div>
 
           <div className="line-clamp-1">
-            {useShowName(artists)?.map((item, index) => (
+            {formattedNames?.map((item, index) => (
               <Link
                 key={index}
-                className="text-xs text-[var(--text-sub)] mt-[3px] hover:text-[var(--text-pink)] hover:underline"
+                className="text-xs text-[var(--text-sub)] mt-[3px] hover-pink-normal hover:underline"
               >
                 {item}
               </Link>
@@ -89,3 +71,32 @@ export default function CartHorzontal({
     </div>
   );
 }
+
+function RenderIcon({ encodeId, handleListRelease }) {
+  const { song, isPlay, loadingSong } = useSelector((state) => state.musicPlay);
+  const { handlePlause, handlePlay } = useHandleMusic();
+  return (
+    <div
+      className={`${
+        song?.idSong == encodeId ? "opacity-100" : "group-hover:opacity-100"
+      } group-hover:opacity-100 transition duration-300  opacity-0 absolute top-[50%] left-0 right-0
+      bottom-auto translate-x-(-50%) translate-y-[-50%] flex justify-center`}
+    >
+      {song?.idSong == encodeId &&
+      loadingSong == false &&
+      song?.loadingSong == false ? (
+        isPlay ? (
+          <IconPlaying onClick={handlePlause} />
+        ) : (
+          <FaPlay onClick={handlePlay} className="text-white text-lg" />
+        )
+      ) : song?.idSong == encodeId && loadingSong ? (
+        <IconLoading />
+      ) : (
+        <FaPlay onClick={handleListRelease} className="text-white text-lg" />
+      )}
+    </div>
+  );
+}
+
+export default memo(CartHorzontal);

@@ -2,6 +2,7 @@ import CartRank from "../../../components/CartRank";
 // Import Swiper React components
 import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import TextHeading from "../../../components/TextHeading";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -9,7 +10,7 @@ export default function ListRank({ title, data }) {
   return (
     <div className="mt-12">
       <div className="flex  justify-between items-center  px-2">
-        <h2 className="text-white font-extrabold text-xl">{title}</h2>
+        <TextHeading text={title} />
         <h2 className="text-[var(--text-sub)] uppercase  text-sm cursor-pointer hover:text-[var(--text-pink)] font-bold">
           Tất cả
         </h2>

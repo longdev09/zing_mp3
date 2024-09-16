@@ -5,6 +5,7 @@ import {
   setCurrentTimeLyric,
   setSongTime,
 } from "../../redux/features/music/currentTimeSlice";
+import { setLoadingSong } from "../../redux/features/music/musicPlaySlice";
 
 export default function PlayMusic({ url }) {
   const audioRef = useRef(null);
@@ -15,15 +16,22 @@ export default function PlayMusic({ url }) {
 
   const { isPlay } = useSelector((state) => state.musicPlay);
   const [timeht, setTimeHt] = useState(0);
+
   useEffect(() => {
     const audio = audioRef.current;
-    if (audio) {
+    if (audio && url) {
       if (audio.src !== url) {
         audio.src = url;
         audio.load(); // Tải lại URL mới nếu URL thay đổi
       }
 
+      // Bắt đầu tải nhạc (set trạng thái loading = true)
+      const handleLoadStart = () => {
+        dispatch(setLoadingSong(true));
+      };
+
       const handleLoadedMetadata = () => {
+        dispatch(setLoadingSong(false));
         dispatch(setSongTime(audio.duration));
       };
 
@@ -52,9 +60,12 @@ export default function PlayMusic({ url }) {
       }
 
       audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+      audio.addEventListener("loadstart", handleLoadStart);
       // Dọn dẹp sự kiện và requestAnimationFrame khi component bị hủy
       return () => {
+        audio.removeEventListener("loadstart", handleLoadStart);
         audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+
         cancelAnimationFrame(animationFrameId);
       };
     }

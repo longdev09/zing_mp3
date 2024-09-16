@@ -7,23 +7,28 @@ import {
   IconTopic,
   IconStar,
 } from "../assets/icon";
+import routesClient from "../config/routes";
 
 export const MenuSideBar1 = [
   {
     icon: <IconLibrary />,
     name: "Thư Viện",
+    to: routesClient.myMusic,
   },
   {
     icon: <IconDiscover />,
     name: "Khám Phá",
+    to: routesClient.home,
   },
   {
     icon: <IconZingchart />,
     name: "#zingchart",
+    to: routesClient.zingChart,
   },
   {
     icon: <IconRadio />,
     name: "Radio",
+    to: routesClient.albums,
   },
 ];
 

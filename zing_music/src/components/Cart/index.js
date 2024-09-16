@@ -35,7 +35,6 @@ function Cart({ thumbnail, nameSong, artists, idList }) {
     dispatch(play());
   };
 
-  console.log(playList);
   return (
     <div className=" px-2 ">
       <div className="w-full overflow-hidden group cursor-pointer rounded-lg">

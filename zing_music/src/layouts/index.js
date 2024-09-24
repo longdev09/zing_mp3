@@ -6,6 +6,7 @@ import PlayList from "./PlayList";
 import SideBar from "./Sidebar";
 import BottomMobile from "./Bottom_Mobile";
 import { useSelector } from "react-redux";
+import Footer from "./Footer";
 export const MyContext = createContext();
 export default function Layout({ children }) {
   // get playlist
@@ -31,38 +32,50 @@ export default function Layout({ children }) {
 
   return (
     <>
-      <Header openPlayList={openPlayList} onOpenSideBar={handleOpenSideBar} />
-      <div className="flex relative overflow-hidden h-full ">
-        <SideBar openSideBar={openSideBar} onCloseSideBar={handleOpenSideBar} />
+      <div className="h-[100vh] w-full overflow-hidden bg-[var(--color-extra)]">
+        <Header openPlayList={openPlayList} onOpenSideBar={handleOpenSideBar} />
         <div
-          className="pt-[var(--h-header)] pb-20 px-[var(--pd-content)] flex-1 overflow-auto w-full "
-          style={{ height: "calc(100vh - 1rem)" }}
+          className="relative top-[var(--h-header)] flex overflow-hidden"
+          style={{
+            height: "calc(100% - calc(var(--h-bottom) + var(--h-header)))",
+          }}
         >
-          {children}
-        </div>
-
-        <PlayList openPlayList={openPlayList} />
-      </div>
-
-      {/* play song */}
-      <MyContext.Provider value={{ handleNotify, openNotifly }}>
-        <div className="fixed bottom-0 z-[99] w-full">
-          <NotifyPlayer />
+          {/* side bar */}
+          <div className="fixed mx-2 h-full w-0 overflow-hidden rounded-lg bg-[var(--color-main-page)] transition-all duration-300 md:relative md:w-[4rem] lg:w-[var(--h-sider-bar)]">
+            <SideBar
+              openSideBar={openSideBar}
+              onCloseSideBar={handleOpenSideBar}
+            />
+          </div>
+          <div className="flex h-full w-full flex-1 flex-col overflow-auto">
+            {children}
+            <Footer />
+          </div>
 
           <div
-            className={`relative  transition-all duration-700 z-[99] ${
-              playList != null ? "translate-y-0" : "translate-y-[100px]  "
-            } `}
+            className={`fixed right-0 z-50 h-full w-0 rounded-lg bg-[var(--color-main-page)] transition-all duration-300 2xl:relative ${
+              openPlayList ? "w-[22rem]" : "w-0"
+            }`}
           >
-            <div className="hidden lg:block">
-              <Bottom onPlaylist={handlePlayList} />
-            </div>
-            <div className="block lg:hidden">
-              <BottomMobile onPlaylist={handlePlayList} />
+            <PlayList />
+          </div>
+          {/* play list */}
+        </div>
+
+        <MyContext.Provider value={{ handleNotify, openNotifly }}>
+          <div className="fixed bottom-0 z-[99] w-full">
+            <NotifyPlayer />
+            <div className={`relative z-[99] transition-all duration-700`}>
+              <div className="hidden lg:block">
+                <Bottom onPlaylist={handlePlayList} />
+              </div>
+              <div className="block lg:hidden">
+                <BottomMobile onPlaylist={handlePlayList} />
+              </div>
             </div>
           </div>
-        </div>
-      </MyContext.Provider>
+        </MyContext.Provider>
+      </div>
     </>
   );
 }

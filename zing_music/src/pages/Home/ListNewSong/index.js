@@ -6,6 +6,8 @@ import {
   setListRelease,
 } from "../../../redux/features/music/musicPlaySlice";
 import TextHeading from "../../../components/TextHeading";
+import { Link } from "react-router-dom";
+import routesClient from "../../../config/routes";
 
 function ListNewSong({ title, data }) {
   const dispatch = useDispatch();
@@ -46,9 +48,11 @@ function ListNewSong({ title, data }) {
             handleClick={handleClick}
           />
         </div>
-        <h2 className="flex items-center text-white uppercase text-xs md:text-sm cursor-pointer hover:text-[var(--color-blue-normal)] font-bold">
-          Tất Cả
-        </h2>
+        <Link to={routesClient.newSong}>
+          <h2 className="flex items-center text-white uppercase text-xs md:text-sm cursor-pointer hover:text-[var(--color-blue-normal)] font-bold">
+            Tất Cả
+          </h2>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4 ">

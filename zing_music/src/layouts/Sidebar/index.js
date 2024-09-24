@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { NavLink } from "react-router-dom";
 import { MenuSideBar1 } from "../../constant";
-
+import LogoFull from "../../components/Logo/LogoFull";
 function SideBar({ openSideBar, onCloseSideBar }) {
   return (
     // <div
@@ -81,21 +81,18 @@ function SideBar({ openSideBar, onCloseSideBar }) {
     //   </div>
     // </div>
 
-    <div
-      className={`w-0 fixed md:w-[4rem] lg:w-[var(--h-sider-bar)] md:relative bg-[var(--color-extra)]  transition-all duration-300  overflow-hidden`}
-    >
-      <div className="px-0 lg:pl-12 lg:pr-8 pt-8">
-        <div className="text-[var(--color-pink-normal)] font-bold text-4xl break-words hidden lg:block">
-          Melodies
-        </div>
-        {/* nav menu */}
-        <ul className="flex flex-col py-5">
-          {MenuSideBar1.map((item, index) => (
-            <ItemMenu key={index} item={item} />
-          ))}
-        </ul>
-        <div class="h-[1px] w-full  bg-[var(--color-pink-normal)]"></div>
+    <div className="px-0 pt-8 lg:pl-12 lg:pr-8">
+      <div className="hidden lg:block">
+        <LogoFull />
       </div>
+
+      {/* nav menu */}
+      <ul className="flex flex-col py-5">
+        {MenuSideBar1.map((item, index) => (
+          <ItemMenu key={index} item={item} />
+        ))}
+      </ul>
+      <div class="h-[1px] w-full bg-[var(--color-pink-normal)]"></div>
     </div>
   );
 }
@@ -105,17 +102,17 @@ function ItemMenu({ item }) {
     <NavLink
       to={item.to}
       className={({ isActive }) =>
-        `py-2 px-5 rounded-lg flex-col my-2 text-base   ${
+        `my-2 flex-col rounded-lg px-5 py-2 text-base ${
           isActive
             ? "bg-[var(--color-pink-normal)] text-lg"
             : "hover:bg-[var(--color-pink-normal-hover)]"
         }`
       }
     >
-      <li className=" text-white font-medium cursor-pointer flex items-center">
+      <li className="flex cursor-pointer items-center font-medium text-white">
         <span>{item.icon}</span>
         <span
-          className={`ml-3 hover:text-white hidden lg:!block  transition duration-300`}
+          className={`ml-3 hidden transition duration-300 hover:text-white lg:!block`}
         >
           {item.name}
         </span>

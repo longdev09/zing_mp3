@@ -179,6 +179,12 @@ class ZingMp3Api {
     });
   }
 
+  getNewRelease() {
+    return this.requestZingMp3("/api/v2/chart/get/new-release", {
+      sig: this.hashParamNoId("/api/v2/chart/get/new-release"),
+    });
+  }
+
   getInfoSong(songId) {
     return this.requestZingMp3("/api/v2/song/get/info", {
       id: songId,
@@ -259,65 +265,11 @@ class ZingMp3Api {
       sig: this.hashParam("/api/v2/page/get/week-chart", id),
     });
   }
-
-  // searchAll(name, page, count) {
-  //     return new Promise((resolve, rejects) => {
-  //         this.requestZingMp3("/api/v2/search", {
-  //             q: name,
-  //             type: "song",
-  //             page: page,
-  //             count: count,
-  //             sig: this.hashSearchAll("/api/v2/search", "song", page, count),
-  //         })
-  //             .then((res) => {
-  //             resolve(res);
-  //         })
-  //             .catch((err) => {
-  //             rejects(err);
-  //         });
-  //     });
-  // }
-
-  // searchAllPlaylist(name, page, count) {
-  //     return new Promise((resolve, rejects) => {
-  //         this.requestZingMp3("/api/v2/search", {
-  //             q: name,
-  //             type: "playlist",
-  //             page: page,
-  //             count: count,
-  //             sig: this.hashSearchAllPlaylist("/api/v2/search", "playlist", page, count),
-  //         })
-  //             .then((res) => {
-  //             resolve(res);
-  //         })
-  //             .catch((err) => {
-  //             rejects(err);
-  //         });
-  //     });
-  // }
-
-  // searchAllVideo(name, page, count) {
-  //     return new Promise((resolve, rejects) => {
-  //         this.requestZingMp3("/api/v2/search", {
-  //             q: name,
-  //             type: "video",
-  //             page: page,
-  //             count: count,
-  //             sig: this.hashSearchAllVideo("/api/v2/search", "video", page, count),
-  //         })
-  //             .then((res) => {
-  //             resolve(res);
-  //         })
-  //             .catch((err) => {
-  //             rejects(err);
-  //         });
-  //     });
-  // }
 }
 
 // instance default
 export const ZingMp3 = new ZingMp3Api(
-  "1.10.40", // VERSION
+  "1.10.47", // VERSION
   "https://zingmp3.vn/", // URL
   "acOrvUS15XRW2o9JksiK1KgQ6Vbds8ZW", // SECRET_KEY
   "X5BM3w8N7MKozC0B85o4KMlzLZKhV00y", // API_KEY

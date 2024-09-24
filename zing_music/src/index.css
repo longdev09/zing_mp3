@@ -29,13 +29,10 @@ code {
 }
 
 
-
-
 img {
   width: 100%;
   height: 100%;
 }
-
 
 /* mau */
 :root{
@@ -47,28 +44,22 @@ img {
   --bg-bottom:  #130c1c;
   --h-bottom: 90px;
   --h-bottom-mobile: 60px;
-
   --h-sider-bar:270px;
   --pd-content: 20px;
-
   --bg-wrap:#5b606025;
 
 
   /*  */
-  --color-main-page: #1F1F1F;
-  --color-extra: #0F0F0F;
+  --color-main-page: #121212;
+  --color-extra: #000000;
 
   /* pink */
-
-
   --color-pink-normal: #EE10B0;
   --color-pink-normal-hover: #D60E9E;
   --color-pink-normal-active: #BE0D8D;
-
   --color-pink-dark: #B30C84;
   --color-pink-dark-hover: #8F0A6A;
   --color-pink-dark-active: #6B074F;
-
   --color-pink-darker: #53063E;
 
   /* blue */
@@ -81,12 +72,27 @@ img {
   --color-blue-dark-active: #06476C;
   --color-blue-darker: #053754;
   
-
- 
+  --svg-filter: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=");
 }
 
 
 @layer utilities {
+  /* bg */
+  .gradient-base-detail {
+    background-image: linear-gradient(rgba(0, 0, 0, .6) 0, #121212 100%), var(--svg-filter);
+  }
+
+  .gradient-base-detail-2 {
+    background: linear-gradient(transparent 0, rgba(0, 0, 0, .5) 100%), var(--svg-filter);
+
+  }
+
+  /* end bg */
+  
+
+
+
+
   .custom-text-stroke {
     -webkit-text-stroke: 1px #4a90e2;
     color: transparent; /* Optional: If you want only the stroke to be visible */
@@ -112,26 +118,22 @@ img {
     @apply hover:bg-[var(--color-pink-dark-hover)];
   }
 
+  .shadow-custom-img {
+    box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+  }
+
+
  
-  
-  
+  .gradient-text {
+    font-size: 40px;
+    font-weight: bold;
+    background: linear-gradient(to right, #ff00ff, #8000ff, #0033ff);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
   
 }
 
-
-
-
-
-
-
-/* @keyframes slide-up {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-} */
 
 .notify-player {
   animation: slide-up 0.5s ease-out;
@@ -152,9 +154,6 @@ img {
   /* Bo tròn thanh trượt */
   border: 3px solid #263855; /* Viền của thanh trượt */
 }
-
-
-
 /* Tùy chỉnh nút Prev */
 .swiper-button-prev{
   background-color: #fff !important; /* Màu nền */

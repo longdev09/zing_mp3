@@ -22,58 +22,58 @@ export default function Bottom({ onPlaylist }) {
 
   return (
     <div
-      className={`fixed z-[99] w-full bottom-0 select-none ${
-        openNotifly ? "bg-[transparent]" : "bg-[var(--bg-bottom)]"
+      className={`fixed bottom-0 z-[99] w-full select-none ${
+        openNotifly ? "bg-[transparent]" : "bg-[var(--color-extra)]"
       } `}
     >
       <div
-        className={`flex items-center h-[--h-bottom] px-5 ${
+        className={`flex h-[--h-bottom] items-center px-5 ${
           openNotifly ? "justify-center" : "justify-between"
         }`}
       >
         <div
-          className={`${openNotifly ? "hidden" : "flex"}  items-center w-[30%]`}
+          className={`${openNotifly ? "hidden" : "flex"} w-[30%] items-center`}
         >
           <img
             className="w-[64px] rounded-lg"
             src={song?.infoSong?.thumbnail}
           />
-          <div className="flex flex-col ml-3">
-            <span className="text-sm font-bold text-white line-clamp-1">
+          <div className="ml-3 flex flex-col">
+            <span className="line-clamp-1 text-sm font-bold text-white">
               {song?.infoSong?.title}
             </span>
 
-            <div className="mt-1 font-bold text-[--text-sub] text-xs line-clamp-1">
+            <div className="mt-1 line-clamp-1 text-xs font-bold text-[--text-sub]">
               {playList &&
                 playList?.itemSong
                   ?.find((item) => item.encodeId === song.idSong)
                   ?.artists?.map((item, index) => (
                     <Link
                       key={index}
-                      className="text-xs text-[var(--text-sub)] mt-[3px] hover:text-[var(--text-pink)] hover:underline"
+                      className="mt-[3px] text-xs text-[var(--text-sub)] hover:text-[var(--text-pink)] hover:underline"
                     >
-                      <span className="text-xs text-[var(--text-sub)] mt-[3px]">
+                      <span className="mt-[3px] text-xs text-[var(--text-sub)]">
                         {item.name + ", "}
                       </span>
                     </Link>
                   ))}
             </div>
           </div>
-          <div className="flex text-white ml-6">
-            <FaHeart className="mr-6 " />
+          <div className="ml-6 flex text-white">
+            <FaHeart className="mr-6" />
             <FaEllipsis />
           </div>
         </div>
 
         <div
-          className={`flex-grow xl:max-w-[40vw] flex ${
+          className={`flex flex-grow xl:max-w-[40vw] ${
             openNotifly ? "flex-col-reverse" : "flex-col"
           }`}
         >
-          <div className="flex items-center justify-center ">
+          <div className="flex items-center justify-center">
             <ControlRandom />
             <ControlPrev />
-            <div className="w-[40px] h-[40px] flex items-center justify-center rounded-full border">
+            <div className="flex h-[40px] w-[40px] items-center justify-center rounded-full border">
               {isPlay ? <ControlPause /> : <ControlPlay />}
             </div>
             <ControlNext />
@@ -84,9 +84,9 @@ export default function Bottom({ onPlaylist }) {
         <div
           className={`${
             openNotifly ? "hidden" : "flex"
-          } w-[30%] text-white  items-center  justify-end`}
+          } w-[30%] items-center justify-end text-white`}
         >
-          <Button onclick={handleNotify} className="!text-lg mx-4">
+          <Button onclick={handleNotify} className="mx-4 !text-lg">
             <FaMicroscope />
           </Button>
 

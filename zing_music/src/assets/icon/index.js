@@ -22,6 +22,7 @@ import {
   faBars,
   faList,
   faX,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import iconPlaying from "../Bg/icon-playing.gif";
@@ -109,6 +110,10 @@ export const FaList = ({ ...props }) => (
 
 export const FaPause = ({ ...props }) => (
   <FontAwesomeIcon icon={faPause} {...props} />
+);
+
+export const FaPlus = ({ ...props }) => (
+  <FontAwesomeIcon icon={faPlus} {...props} />
 );
 
 export const FaX = ({ ...props }) => <FontAwesomeIcon icon={faX} {...props} />;

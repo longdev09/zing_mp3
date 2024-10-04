@@ -1,4 +1,5 @@
-import Button from "../Button";
+import Button from "../atoms/Button";
+
 import { FaShuffle } from "../../assets/icon";
 import { useDispatch, useSelector } from "react-redux";
 import { setRandomSong } from "../../redux/features/music/musicPlaySlice";

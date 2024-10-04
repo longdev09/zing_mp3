@@ -11,7 +11,7 @@ export default function PlayMusic({ url }) {
   const audioRef = useRef(null);
   const dispatch = useDispatch();
   const { currentTime, volume, songTime } = useSelector(
-    (state) => state.currentTime
+    (state) => state.currentTime,
   );
 
   const { isPlay } = useSelector((state) => state.musicPlay);
@@ -21,6 +21,7 @@ export default function PlayMusic({ url }) {
     const audio = audioRef.current;
     if (audio && url) {
       if (audio.src !== url) {
+        console.log("sssssssssssssssssssssss ss");
         audio.src = url;
         audio.load(); // Tải lại URL mới nếu URL thay đổi
       }

@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaBars, FaEllipsis, FaHeart, FaMicroscope } from "../../assets/icon";
-import Button from "../../components/Button";
 
 import { useContext } from "react";
 import { MyContext } from "..";
@@ -86,9 +85,9 @@ export default function Bottom({ onPlaylist }) {
             openNotifly ? "hidden" : "flex"
           } w-[30%] items-center justify-end text-white`}
         >
-          <Button onclick={handleNotify} className="mx-4 !text-lg">
+          {/* <Button onclick={handleNotify} className="mx-4 !text-lg">
             <FaMicroscope />
-          </Button>
+          </Button> */}
 
           <div className="flex items-center">
             <Volume />

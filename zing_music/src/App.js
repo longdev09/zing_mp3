@@ -1,12 +1,11 @@
 import { Fragment } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import layout from "./layouts";
-import { publicRoutes } from "./routes";
-import PlayMusic from "./components/(Player_Music)";
 import { useSelector } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import PlayMusic from "./components/(Player_Music)";
+import { publicRoutes } from "./routes";
+import layout from "./components/templates/Layout";
 function App() {
   const { song } = useSelector((state) => state.musicPlay);
-
   return (
     <>
       <BrowserRouter>

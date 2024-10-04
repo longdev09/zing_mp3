@@ -1,4 +1,5 @@
-import Button from "../Button";
+import Button from "../atoms/Button";
+
 import { FaBackwardStep } from "../../assets/icon";
 import { useDispatch } from "react-redux";
 import { prevSong } from "../../redux/features/music/musicPlaySlice";

@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import Button from "../Button";
+
 import { FaVolumeHigh, FaVolumeXmark } from "../../assets/icon";
 import { useDispatch } from "react-redux";
 import { setVolume } from "../../redux/features/music/currentTimeSlice";
@@ -22,7 +22,7 @@ export default function Volume() {
       const newVolume = ((e.clientX - rect.left) / rect.width) * 100;
       handleVolumeChange(newVolume);
     }, 10),
-    []
+    [],
   );
 
   const handleMouseDown = (e) => {
@@ -33,7 +33,7 @@ export default function Volume() {
       () => {
         window.removeEventListener("mousemove", handleMouseMove);
       },
-      { once: true }
+      { once: true },
     );
   };
 
@@ -44,11 +44,11 @@ export default function Volume() {
 
   return (
     <>
-      <Button onclick={handleVolume} className="!text-lg mx-4">
+      {/* <Button onclick={handleVolume} className="mx-4 !text-lg">
         {volume === 0 ? <FaVolumeXmark /> : <FaVolumeHigh />}
-      </Button>
+      </Button> */}
       <div
-        className="w-[70px] h-[5px] bg-[#5a5560] rounded-lg relative cursor-pointer"
+        className="relative h-[5px] w-[70px] cursor-pointer rounded-lg bg-[#5a5560]"
         onMouseDown={handleMouseDown}
       >
         <div

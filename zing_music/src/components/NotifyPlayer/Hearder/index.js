@@ -4,7 +4,6 @@ import {
   FaGear,
   FaUpRightAndDownLeftFromCenter,
 } from "../../../assets/icon";
-import Button from "../../Button";
 
 export default function Header({ sttContent, onNotifly }) {
   // Hàm để mở toàn màn hình
@@ -39,30 +38,30 @@ export default function Header({ sttContent, onNotifly }) {
   };
 
   return (
-    <div className="flex px-6 py-6 items-center justify-between cursor-pointer">
+    <div className="flex cursor-pointer items-center justify-between px-6 py-6">
       <div className="">
         <img src="https://zjs.zmdcdn.me/zmp3-desktop/dev/119956/static/media/icon_zing_mp3_60.f6b51045.svg" />
         <div></div>
       </div>
-      <div className="bg-[#ffffff1a] rounded-full overflow-hidden p-1 flex items-center gap-4 ">
-        <div className={`px-12 py-1 rounded-full bg-[#ffffff1a]`}>
-          <span className="text-white font-bold">Lời bài hát</span>
+      <div className="flex items-center gap-4 overflow-hidden rounded-full bg-[#ffffff1a] p-1">
+        <div className={`rounded-full bg-[#ffffff1a] px-12 py-1`}>
+          <span className="font-bold text-white">Lời bài hát</span>
         </div>
       </div>
-      <div className="flex items-center gap-2 ">
-        <Button
+      <div className="flex items-center gap-2">
+        {/* <Button
           onclick={toggleFullscreen}
-          className="rounded-full bg-[#ffffff1a] w-[44px] h-[44px] flex  justify-center"
+          className="flex h-[44px] w-[44px] justify-center rounded-full bg-[#ffffff1a]"
         >
           <FaUpRightAndDownLeftFromCenter className="p-2 text-lg" />
-        </Button>
+        </Button> */}
 
-        <Button
-          className="rounded-full bg-[#ffffff1a] w-[44px] h-[44px] flex  justify-center"
+        {/* <Button
+          className="flex h-[44px] w-[44px] justify-center rounded-full bg-[#ffffff1a]"
           onclick={onNotifly}
         >
           <FaChevronDown className="p-2 text-lg" />
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { FaForwardStep } from "../../assets/icon";
 import { nextSong } from "../../redux/features/music/musicPlaySlice";
-import Button from "../Button";
+import Button from "../atoms/Button";
 import { useDispatch } from "react-redux";
 export default function ControlNext() {
   const dispatch = useDispatch();

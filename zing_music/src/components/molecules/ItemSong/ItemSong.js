@@ -1,48 +1,104 @@
-import PropTypes from "prop-types";
-
-import { Link } from "react-router-dom";
-function ItemSong({ idx, thumbnail, title, artists, releaseDate, songTime }) {
+import moment from "moment";
+import { FaPlus, IconPremium } from "../../../assets/icon";
+import { useHandleMusic } from "../../../hooks";
+import useConverTime from "../../../hooks/useConverTime";
+import Button from "../../atoms/Button";
+import ShowArtists from "../../atoms/ShowArtists";
+import SongThumb from "../../atoms/SongThumb";
+function ItemSong({ listSong, columns, data, index }) {
   return (
-    <div className="hover-bg-pink-dark group my-3 flex cursor-pointer flex-row items-center gap-4 rounded-lg px-4 py-1 duration-300">
-      <div className="flex-none text-base font-bold text-white">
-        <span>{idx}</span>
+    <div className="hover-bg-pink-dark group relative flex cursor-pointer flex-row items-center gap-4 rounded-lg p-2 duration-300">
+      <div className="tran absolute right-[100px] opacity-0 group-hover:opacity-100">
+        <Button
+          label={<FaPlus />}
+          variant={"roundedNoBg"}
+          className="h-5 w-5 !text-[10px]"
+        />
       </div>
-      <div
-        className="flex flex-none items-center gap-2"
-        style={{ width: "calc(70% - 100px)" }}
-      >
-        <div className="h-[40px] w-[40px]">
-          <img src={thumbnail} />
-        </div>
 
-        <div className="flex flex-col">
-          <Link className="hover-pink-normal mb-1 text-base font-bold text-white">
-            <span>{title}</span>
-          </Link>
-          <div className="flex flex-row">
-            <Link className="hover-pink-normal text-sm text-[var(--text-sub)] hover:underline">
-              <span>{artists}</span>
-            </Link>
-          </div>
+      {columns?.map((col) => (
+        <div key={col.key} className={col.className} sss>
+          {col.type == "TextDefault" ? (
+            <TextDefault text={data[col.dataIndex]} />
+          ) : col.type == "TextImg" ? (
+            <TextImg
+              listSong={listSong}
+              idSong={data.encodeId}
+              thumbnail={data[col.thumbnail]}
+              title={data[col.title_]}
+              previewInfo={data.previewInfo}
+              artists={data.artists}
+            />
+          ) : col.type == "TextNumber" ? (
+            <TextNumber text={index + 1} />
+          ) : col.type == "TextDurations" ? (
+            <TextDurations text={data.duration} />
+          ) : col.type == "TextReleaseDate" ? (
+            <TextReleaseDate text={data.releaseDate} />
+          ) : (
+            ""
+          )}
         </div>
+      ))}
+    </div>
+  );
+}
+
+function TextDurations({ text }) {
+  const time = useConverTime(text);
+  return (
+    <div className="text-sm text-[#b3b3b3]">
+      <span>{time}</span>
+    </div>
+  );
+}
+
+function TextReleaseDate({ text }) {
+  return (
+    <div className="text-sm text-[#b3b3b3]">
+      <span> {moment.unix(text).utc().format("DD.MM.YYYY")}</span>
+    </div>
+  );
+}
+
+function TextDefault({ text }) {
+  return (
+    <div className="text-sm text-[#b3b3b3]">
+      <span>{text}</span>
+    </div>
+  );
+}
+
+function TextImg({ listSong, idSong, thumbnail, title, artists, previewInfo }) {
+  const { handleSetPlayList } = useHandleMusic();
+
+  return (
+    <div className="flex w-full gap-2">
+      <div className="h-[40px] w-[40px] text-white">
+        <SongThumb
+          idSong={idSong}
+          src={thumbnail}
+          handle={() => handleSetPlayList("new-release", listSong, idSong)}
+        />
       </div>
-      <div className="flex-auto text-base text-[var(--text-sub)] group-hover:text-white">
-        <span>{releaseDate}</span>
-      </div>
-      <div className="flex-none text-base text-[var(--text-sub)] group-hover:text-white">
-        <span>{songTime}</span>
+      <div className="flex flex-col justify-center">
+        <div className="flex items-center">
+          <span className="hover-pink-normal mb-1 mr-3 text-sm font-bold text-white">
+            <span>{title}</span>
+          </span>
+          {previewInfo ? <IconPremium /> : ""}
+        </div>
+        <ShowArtists artists={artists} />
       </div>
     </div>
   );
 }
 
-ItemSong.prototype = {
-  idx: PropTypes.bool,
-  thumbnail: PropTypes.string,
-  title: PropTypes.string,
-  artists: PropTypes.array,
-  releaseDate: PropTypes.number,
-  songTime: PropTypes.number,
-};
-
+function TextNumber({ text, key }) {
+  return (
+    <div className="text-sm text-[#b3b3b3]">
+      <span>{text}</span>
+    </div>
+  );
+}
 export default ItemSong;

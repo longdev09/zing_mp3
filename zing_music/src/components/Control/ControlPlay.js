@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { play } from "../../redux/features/music/musicPlaySlice";
-import Button from "../Button";
+import Button from "../atoms/Button";
+
 import { FaPlay } from "../../assets/icon";
 
 // nut play music

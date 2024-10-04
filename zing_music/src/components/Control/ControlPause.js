@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { FaPause } from "../../assets/icon";
 import { pause } from "../../redux/features/music/musicPlaySlice";
-import Button from "../Button";
+import Button from "../atoms/Button";
 
 export default function ControlPause() {
   const dispatch = useDispatch();

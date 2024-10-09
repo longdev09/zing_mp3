@@ -269,7 +269,7 @@ class ZingMp3Api {
 
 // instance default
 export const ZingMp3 = new ZingMp3Api(
-  "1.10.47", // VERSION
+  "1.10.49", // VERSION
   "https://zingmp3.vn/", // URL
   "acOrvUS15XRW2o9JksiK1KgQ6Vbds8ZW", // SECRET_KEY
   "X5BM3w8N7MKozC0B85o4KMlzLZKhV00y", // API_KEY

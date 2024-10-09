@@ -7,7 +7,7 @@ function PlayingBar() {
   const { playList } = useSelector((state) => state.musicPlay);
 
   return (
-    <div className="fixed right-0 z-50 h-full w-[22rem] rounded-lg bg-[var(--color-main-page)] transition-all duration-300 2xl:relative">
+    <div className="fixed right-0 z-50 mx-2 h-full w-[22rem] rounded-lg bg-[var(--color-main-page)] transition-all duration-300 2xl:relative">
       <div className="relative flex flex-col">
         {/* header */}
         <Header />

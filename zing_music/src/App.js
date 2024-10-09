@@ -1,9 +1,10 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import PlayMusic from "./components/(Player_Music)";
+
 import { publicRoutes } from "./routes";
 import layout from "./components/templates/Layout";
+import AudioPlayer from "./components/atoms/AudioPlayer/AudioPlayer";
 function App() {
   const { song } = useSelector((state) => state.musicPlay);
   return (
@@ -28,7 +29,7 @@ function App() {
         </Routes>
       </BrowserRouter>
 
-      <PlayMusic url={song?.url} />
+      <AudioPlayer url={song?.url} />
     </>
   );
 }

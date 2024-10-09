@@ -1,20 +1,32 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import http from "../../../utils/http";
-import { setCurrentTime } from "./currentTimeSlice";
+import { set_PreviewTime, setCurrentTime } from "./currentTimeSlice";
 
 // lay audio bai hat
 export const fetchApiGetSong = createAsyncThunk(
   "musicPlay/fetchApiGetSong",
   async (idSong, { dispatch }) => {
+    let obj = { url: "", infoSong: "" };
+    dispatch(set_PreviewTime(0)); // thoi gian tua lai 0
     const response = await http.get(`song/${idSong}`);
+    const infoSong = await http.get(`songInfo/${idSong}`);
     if (response.data.msg == "Success") {
       dispatch(setCurrentTime(0));
-      return response.data.data["128"];
+      obj = {
+        ...obj,
+        url: response.data.data["128"],
+        infoSong: infoSong.data.data,
+      };
     } else {
       const response = await http.get(`songPremium/${idSong}`); // lấy bài hát priemium
       dispatch(setCurrentTime(0));
-      return response.data.data.link;
+      obj = {
+        ...obj,
+        url: response.data.data["128"],
+        infoSong: infoSong.data.data,
+      };
     }
+    return obj;
   },
 );
 
@@ -58,41 +70,27 @@ export const musicPlaySlice = createSlice({
     song: null,
     randomSong: false,
     loadingSong: false,
+    volume_: 50,
   },
   extraReducers: (builder) => {
     builder.addCase(fetchApiGetSong.fulfilled, (state, action) => {
       state.isPlay = true;
       state.song = {
         idSong: action.meta.arg,
-        url: action.payload,
+        url: action.payload.url,
+        infoSong: action.payload.infoSong,
       };
     });
   },
 
   reducers: {
-    pause: (state) => {
-      state.isPlay = false;
-    },
-    play: (state) => {
-      state.isPlay = true;
-    },
     setLoadingSong: (state, action) => {
       state.loadingSong = action.payload;
-    },
-    // lấy danh sach bài hát mới
-    setListRelease: (state, action) => {
-      state.isPlay = true;
-      state.playList = {
-        ...state.playList,
-        itemSong: action.payload,
-        idPlayList: "newSong",
-      };
     },
     setRandomSong: (state, action) => {
       state.playList = state.playList.sort(() => Math.random() - 0.5);
       state.randomSong = action.payload;
     },
-
     // lay danh bai hat de phat
     setPlayList: (state, action) => {
       state.isPlay = true;
@@ -100,6 +98,15 @@ export const musicPlaySlice = createSlice({
         idList: action.payload[0],
         list: action.payload[1],
       };
+    },
+    pause: (state) => {
+      state.isPlay = false;
+    },
+    play: (state) => {
+      state.isPlay = true;
+    },
+    setVolume: (state, action) => {
+      state.volume_ = action.payload;
     },
   },
 });
@@ -111,5 +118,7 @@ export const {
   setRandomSong,
   setLoadingSong,
   setPlayList,
+  setVolume,
 } = musicPlaySlice.actions;
+
 export default musicPlaySlice.reducer;

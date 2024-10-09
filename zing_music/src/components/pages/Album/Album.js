@@ -18,10 +18,11 @@ const columns = [
   },
 
   {
-    title: "Phát hành",
+    title: "Albums",
     key: "index",
     className: "flex-auto",
-    type: "TextReleaseDate",
+    type: "TextDefault",
+    dataIndex: "album.title",
   },
   {
     title: "Thời gian",

@@ -10,7 +10,6 @@ function Home() {
   });
 
   if (!data) {
-    console.log("ss ");
   }
 
   return (

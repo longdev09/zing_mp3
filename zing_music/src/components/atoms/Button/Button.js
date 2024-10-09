@@ -19,6 +19,9 @@ function Button({
       "h-14 w-14 rounded-full bg-[var(--color-pink-normal)] text-black  text-2xl flex items-center justify-center",
     roundedNoBg:
       "flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-[2px] text-xl",
+
+    btnAction:
+      "rounded-full w-[40px] h-[40px] flex items-center justify-center text-lg hover:bg-[#ffffff1a]",
   };
 
   return (

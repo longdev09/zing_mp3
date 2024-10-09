@@ -1,12 +1,4 @@
-import { useState } from "react";
-import {
-  FaChevronDown,
-  FaGear,
-  FaUpRightAndDownLeftFromCenter,
-} from "../../../assets/icon";
-
-export default function Header({ sttContent, onNotifly }) {
-  // Hàm để mở toàn màn hình
+function Header() {
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
       if (document.documentElement.requestFullscreen) {
@@ -66,3 +58,5 @@ export default function Header({ sttContent, onNotifly }) {
     </div>
   );
 }
+
+export default Header;

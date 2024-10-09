@@ -5,6 +5,7 @@ import useConverTime from "../../../hooks/useConverTime";
 import Button from "../../atoms/Button";
 import ShowArtists from "../../atoms/ShowArtists";
 import SongThumb from "../../atoms/SongThumb";
+import get from "lodash/get";
 function ItemSong({ listSong, columns, data, index }) {
   return (
     <div className="hover-bg-pink-dark group relative flex cursor-pointer flex-row items-center gap-4 rounded-lg p-2 duration-300">
@@ -19,7 +20,7 @@ function ItemSong({ listSong, columns, data, index }) {
       {columns?.map((col) => (
         <div key={col.key} className={col.className} sss>
           {col.type == "TextDefault" ? (
-            <TextDefault text={data[col.dataIndex]} />
+            <TextDefault text={get(data, col.dataIndex)} />
           ) : col.type == "TextImg" ? (
             <TextImg
               listSong={listSong}

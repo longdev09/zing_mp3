@@ -42,13 +42,11 @@ img {
   --text-purple: #9b4de0;
   --text-sub: #ffffff80;
   --bg-bottom:  #130c1c;
-  --h-bottom: 90px;
-  --h-bottom-mobile: 60px;
   --w-nav-bar:420px;
   --pd-content: 20px;
   --bg-wrap:#5b606025;
 
-
+  --h-bottom: 90px;
   /*  */
   --color-main-page: #121212;
   --color-extra: #000000;
@@ -142,39 +140,6 @@ img {
 
 
 ::-webkit-scrollbar {
-  width: 12px; /* Chiều rộng của thanh cuộn */
+  width: 0; /* Chiều rộng của thanh cuộn */
 }
-
-::-webkit-scrollbar-track {
-  background: #070c13; /* Màu nền của thanh cuộn */
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #263855; /* Màu của thanh trượt */
-  /* Bo tròn thanh trượt */
-  border: 3px solid #263855; /* Viền của thanh trượt */
-}
-/* Tùy chỉnh nút Prev */
-.swiper-button-prev{
-  background-color: #fff !important; /* Màu nền */
-  color: black !important; /* Màu chữ */
-  border-radius: 50% !important;
-  width: 38px !important;
-  height: 38px !important;
-}
-.swiper-button-prev::after{
-  font-size:  10px !important;
-}
-
-.swiper-button-next{
-  background-color: #fff !important; /* Màu nền */
-  color: rgb(83, 8, 8) !important; /* Màu chữ */
-  border-radius: 50% !important;
-  width: 38px !important;
-  height: 38px !important;
-}
-.swiper-button-next::after{
-  font-size:  14px !important;
-}
-
 

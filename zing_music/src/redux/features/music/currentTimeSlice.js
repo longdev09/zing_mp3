@@ -1,28 +1,25 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const currentTimeSlice = createSlice({
   name: "currentTime",
   initialState: {
-    currentTime: 0,
-    songTime: 0,
-    volume: 50,
-    currentTimeLyric: 0,
+    duration: 0, // tong thời gian của bài hát
+    currentTime: 0, // thời gian phát bài hát
+    previewTime: 0, // thời gian tua bài hát
   },
   reducers: {
     setCurrentTime: (state, action) => {
       state.currentTime = action.payload;
     },
-    setSongTime: (state, action) => {
-      state.songTime = action.payload;
+    setDuration: (state, action) => {
+      state.duration = action.payload;
     },
-    setVolume: (state, action) => {
-      state.volume = action.payload.toFixed(1);
-    },
-    setCurrentTimeLyric: (state, action) => {
-      state.currentTimeLyric = action.payload;
+
+    set_PreviewTime: (state, action) => {
+      state.previewTime = action.payload;
     },
   },
 });
-export const { setCurrentTime, setSongTime, setVolume, setCurrentTimeLyric } =
+export const { setDuration, setCurrentTime, set_PreviewTime } =
   currentTimeSlice.actions;
 export default currentTimeSlice.reducer;

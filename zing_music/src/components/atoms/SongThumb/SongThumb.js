@@ -10,7 +10,6 @@ function SongThumb({
   handle,
 }) {
   const { song, isPlay, loadingSong } = useSelector((state) => state.musicPlay);
-
   const { handlePlause, handlePlay } = useHandleMusic();
 
   return (

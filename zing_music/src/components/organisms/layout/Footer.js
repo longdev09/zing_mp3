@@ -3,7 +3,7 @@ import Logo from "../../atoms/Logo";
 
 function Footer() {
   return (
-    <div className="flex justify-center bg-[var(--color-main-page)] py-20">
+    <div className="flex justify-center bg-[var(--color-main-page)] pb-24 pt-10">
       <div className="flex flex-col items-center">
         <Logo />
         <div className="mt-10 flex flex-row gap-5">

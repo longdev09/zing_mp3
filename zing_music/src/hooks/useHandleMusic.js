@@ -5,30 +5,48 @@ import {
   play,
   setPlayList,
 } from "../redux/features/music/musicPlaySlice";
+import { set_PreviewTime } from "../redux/features/music/currentTimeSlice";
+import { setOpenNowPlay } from "../redux/features/action/actionMusicSlice";
 const useHandleMusic = () => {
   // Khởi tạo dispatch
   const dispatch = useDispatch();
 
-  //Tạm dừng phát
+  //Sự kiện tạm dừng phát
   const handlePlause = () => {
     dispatch(pause());
   };
 
-  //Bắt Đầu phát
+  //Sự kiện chơi nhạc
   const handlePlay = () => {
     dispatch(play());
   };
 
+  // Sự kiện volume
+  const handleVolume = () => {};
+
+  // Sự kiện mở now playing
+  const handleNowPlay = () => {
+    dispatch(setOpenNowPlay());
+  };
+
+  // Sự kiện lấy audio bài hát
   const handleGetSong = async (idSong) => {
     dispatch(fetchApiGetSong(idSong));
   };
-  //Lấy danh sách nhạc va phat bai hat playlist
+
+  //Sự kiện lấy danh sách bài hát để phát
   const handleSetPlayList = async (idList, playList, idSong) => {
     dispatch(setPlayList([idList, playList]));
     dispatch(fetchApiGetSong(idSong));
   };
 
-  return { handlePlay, handlePlause, handleSetPlayList, handleGetSong };
+  return {
+    handlePlay,
+    handlePlause,
+    handleSetPlayList,
+    handleGetSong,
+    handleNowPlay,
+  };
 };
 
 export default useHandleMusic;

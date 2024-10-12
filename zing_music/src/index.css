@@ -85,6 +85,10 @@ img {
 
   }
 
+  .gradient-base-detail-top{
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, #121212 100%), var(--svg-filter);
+  }
+
   /* end bg */
   
 

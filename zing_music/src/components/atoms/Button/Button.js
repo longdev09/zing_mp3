@@ -7,10 +7,11 @@ function Button({
   rightIcon,
   variant,
   className,
+  type,
 }) {
   // Class mặc định cho nút
   const defaultClasses =
-    "inline-block cursor-pointer rounded font-medium text-white flex gap-2 items-center  transition-all duration-300 ";
+    "inline-block cursor-pointer rounded font-medium text-white flex gap-2 items-center transition-all duration-300 ";
 
   const variantClasses = {
     primary: "rounded-lg bg-[var(--color-pink-normal)] px-5 py-2 text-base ", // Đảm bảo thêm lớp màu phù hợp với Tailwind
@@ -26,10 +27,10 @@ function Button({
 
   return (
     <button
+      type={type}
       onClick={onClick}
       className={`${defaultClasses} ${variantClasses[variant] || ""} ${className}`} // Nếu variant không hợp lệ, sẽ trả về chuỗi rỗng
     >
-      {leftIcon ? leftIcon : ""}
       <span>{label}</span>
       {rightIcon ? rightIcon : ""}
     </button>

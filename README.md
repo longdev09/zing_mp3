@@ -21,10 +21,43 @@ Log in
 
 ## Features
 1.  **User** 
-- #### Log in.
-- #### Register
-- #### Create playlist, (download play list images, add songs)
-- #### Play music, change songs, organize playlists
+<ul>
+  <li><strong>Log In:</strong>
+    <ul>
+      <li>Allow users to log in to their accounts securely.</li>
+      <li>Use JWT or session cookies for authentication and session management.</li>
+    </ul>
+  </li>
+
+  <li><strong>Register:</strong>
+    <ul>
+      <li>Provide a registration form for new users to create accounts.</li>
+      <li>Include input validation for secure account creation.</li>
+    </ul>
+  </li>
+
+  <li><strong>Create Playlist:</strong>
+    <ul>
+      <li>Upload Playlist Image: Allow users to upload a custom image for their playlist.</li>
+      <li>Add Songs: Enable users to search and add songs to their playlists.</li>
+      <li>Organize Songs: Let users reorder or remove songs within a playlist.</li>
+    </ul>
+  </li>
+
+  <li><strong>Play Music:</strong>
+    <ul>
+      <li>Playback Controls: Include basic controls such as play, pause, next, and previous.</li>
+      <li>Switch Songs: Allow seamless transitions between songs in a playlist.</li>
+    </ul>
+  </li>
+
+  <li><strong>Organize Playlists:</strong>
+    <ul>
+      <li>Enable users to edit, delete, and reorder their playlists for better management.</li>
+    </ul>
+  </li>
+</ul>
+
 
 ## Demo
 - **Update**

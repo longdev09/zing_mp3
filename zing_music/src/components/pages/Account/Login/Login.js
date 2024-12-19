@@ -1,9 +1,11 @@
+import { Toaster } from "react-hot-toast";
 import Logo from "../../../atoms/Logo";
-import { LoginForm, LoginQuickly } from "../../../molecules/login";
+import { LoginForm, LoginQuickly } from "../../../molecules/account/login";
 
 function Login() {
   return (
     <div className="relative h-[100vh] w-full bg-[var(--color-main-page)]">
+      <Toaster />
       <div className="gradient-base-detail-top absolute h-[100vh] w-full bg-[var(--color-pink-dark)]"></div>
       <div className="relative flex h-full w-full items-center justify-center">
         <div className="gradient-base-detail w-[600px] rounded-xl bg-[var(--color-pink-normal)]">

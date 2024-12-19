@@ -15,7 +15,6 @@ function Layout({ children }) {
   return (
     <>
       <div className="h-[100vh] w-full bg-[var(--color-extra)]">
-        {/* header trang web */}
         <Header />
         <div
           className="relative top-[var(--h-header)] flex h-full overflow-hidden"
@@ -30,7 +29,7 @@ function Layout({ children }) {
           </div>
           <PlayingBar />
         </div>
-        <div className="fixed bottom-0 z-[99] flex w-full items-center bg-slate-50">
+        <div className="fixed bottom-0 z-[70] flex w-full items-center bg-slate-50">
           <Controls />
           <NowPlaying />
         </div>

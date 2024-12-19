@@ -30,35 +30,46 @@ export const fetchApiGetSong = createAsyncThunk(
   },
 );
 
-// chuyen bai hat ke tiep
+// next bài hát
 export const nextSong = createAsyncThunk(
   "musicPlay/nextSong",
   async (_, { getState, dispatch }) => {
     const idSong = getState().musicPlay.song.idSong; // lay ra id bai hat hien tai
-    const indexSong = getState().musicPlay.playList.itemSong.findIndex(
+    const indexSong = getState().musicPlay.playList.list.findIndex(
       (i) => i.encodeId == idSong,
     );
-    dispatch(
-      fetchApiGetSong(
-        getState().musicPlay.playList.itemSong[indexSong + 1].encodeId,
-      ),
-    );
+    if (indexSong === getState().musicPlay.playList.list.length - 1) {
+      console.log("sss");
+      dispatch(fetchApiGetSong(getState().musicPlay.playList.list[0].encodeId));
+    } else {
+      dispatch(
+        fetchApiGetSong(
+          getState().musicPlay.playList.list[indexSong + 1].encodeId,
+        ),
+      );
+    }
   },
 );
 
-// lui bai hat
+// prev bài hát
 export const prevSong = createAsyncThunk(
-  "musicPlay/prevSong",
+  "musicPlay/nextSong",
   async (_, { getState, dispatch }) => {
     const idSong = getState().musicPlay.song.idSong; // lay ra id bai hat hien tai
-    const indexSong = getState().musicPlay.playList.itemSong.findIndex(
+    const indexSong = getState().musicPlay.playList.list.findIndex(
       (i) => i.encodeId == idSong,
     );
-    dispatch(
-      fetchApiGetSong(
-        getState().musicPlay.playList.itemSong[indexSong - 1].encodeId,
-      ),
-    );
+    if (indexSong === 0) {
+      dispatch(
+        fetchApiGetSong(getState().musicPlay.playList.list[indexSong].encodeId),
+      );
+    } else {
+      dispatch(
+        fetchApiGetSong(
+          getState().musicPlay.playList.list[indexSong - 1].encodeId,
+        ),
+      );
+    }
   },
 );
 
@@ -99,6 +110,9 @@ export const musicPlaySlice = createSlice({
         list: action.payload[1],
       };
     },
+    updatePlayList: (state, action) => {
+      state.playList = { ...state.playList, list: action.payload };
+    },
     pause: (state) => {
       state.isPlay = false;
     },
@@ -119,6 +133,7 @@ export const {
   setLoadingSong,
   setPlayList,
   setVolume,
+  updatePlayList,
 } = musicPlaySlice.actions;
 
 export default musicPlaySlice.reducer;

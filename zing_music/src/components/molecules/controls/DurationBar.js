@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useConverTime } from "../../../hooks";
+import { useConverTime, useHandleMusic } from "../../../hooks";
 import { set_PreviewTime } from "../../../redux/features/music/currentTimeSlice";
 function DurationBar() {
+  // thời lượng bài hát
   const dispatch = useDispatch();
   const refLine = useRef();
   const { duration, currentTime } = useSelector((state) => state.currentTime);
   const [isDragging, setIsDragging] = useState(false);
   const [previewTime, setPreviewTime] = useState(currentTime);
+
+
 
   useEffect(() => {
     const handleMouseMove = (e) => {

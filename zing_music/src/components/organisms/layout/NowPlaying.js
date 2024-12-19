@@ -45,7 +45,6 @@ function NowPlaying() {
     }
   }, [song]);
 
-  console.log(dominantColor);
   return (
     <div
       className={`fixed bottom-0 left-0 z-10 w-full overflow-hidden transition-all duration-500 ${

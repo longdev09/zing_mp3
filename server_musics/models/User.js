@@ -20,7 +20,11 @@ const UserSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now, // Tự động lưu thời gian tạo
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now, // Tự động lưu thời gian cập nhật
   },
 });
 

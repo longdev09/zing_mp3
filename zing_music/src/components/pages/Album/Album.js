@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { list } from "../../../apis";
 import { LoadingPlayList } from "../../atoms/Loading";
 import PlayList from "../../templates/PlayList/PlayList";
+
 const columns = [
   {
     title: "#",
@@ -14,13 +15,13 @@ const columns = [
     type: "TextImg",
     thumbnail: "thumbnail",
     title_: "title",
-    className: "flex-none w-[60%]",
+    className: "lg:flex-none flex-auto w-[60%]",
   },
 
   {
     title: "Albums",
     key: "index",
-    className: "flex-auto",
+    className: "flex-auto hidden lg:block",
     type: "TextDefault",
     dataIndex: "album.title",
   },
@@ -31,6 +32,7 @@ const columns = [
     type: "TextDurations",
   },
 ];
+
 function Album() {
   const { idAlbum } = useParams();
 
@@ -42,7 +44,6 @@ function Album() {
   if (isLoading) {
     return <LoadingPlayList />;
   }
-  console.log();
 
   if (error) return <div>Error loading user data</div>;
   return (

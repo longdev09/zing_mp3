@@ -1,18 +1,19 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoadingSong } from "../../../redux/features/music/musicPlaySlice";
+import { useHandleMusic } from "../../../hooks";
 import {
   set_PreviewTime,
   setCurrentTime,
   setDuration,
 } from "../../../redux/features/music/currentTimeSlice";
+import { setLoadingSong } from "../../../redux/features/music/musicPlaySlice";
 
 function AudioPlayer() {
   const audioRef = useRef(null);
   const dispatch = useDispatch();
   const { song, isPlay, volume_ } = useSelector((state) => state.musicPlay);
   const { previewTime } = useSelector((state) => state.currentTime);
-
+  const { handleNextSong } = useHandleMusic();
   // Effect cập nhật trạng thái
   useEffect(() => {
     const audio = audioRef.current;
@@ -41,6 +42,9 @@ function AudioPlayer() {
       // Hàm xử lý cập nhật thời gian hiện tại của bài hát
       const handleTimeUpdate = () => {
         dispatch(setCurrentTime(audio.currentTime));
+        if (audio.duration == audio.currentTime && audio.duration != 0) {
+          handleNextSong();
+        }
       };
 
       // Hàm xử lý lấy tổng thời gian của bài hát

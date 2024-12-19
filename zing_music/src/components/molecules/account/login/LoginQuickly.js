@@ -1,5 +1,5 @@
-import { LogoGg } from "../../../assets/icon";
-import Button from "../../atoms/Button";
+import { LogoGg } from "../../../../assets/icon";
+import Button from "../../../atoms/Button";
 
 function LoginQuickly() {
   return (

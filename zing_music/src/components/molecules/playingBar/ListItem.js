@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 import { FaEllipsis, FaHeart, IconPremium } from "../../../assets/icon";
 import { useHandleMusic } from "../../../hooks";
 import ShowArtists from "../../atoms/ShowArtists";
 import SongThumb from "../../atoms/SongThumb/SongThumb";
+
 function ListItem({ playList }) {
   const [items, setItems] = useState(playList);
+  const { handleUpdateSongPlayList } = useHandleMusic();
 
-  // Cập nhật items khi playList thay đổi
   useEffect(() => {
-    setItems(playList); // Khi playList thay đổi, cập nhật items
+    setItems(playList);
   }, [playList]);
 
   const handleOnDragEnd = (result) => {
@@ -19,13 +20,14 @@ function ListItem({ playList }) {
     const [reorderedItem] = newItems.splice(result.source.index, 1);
     newItems.splice(result.destination.index, 0, reorderedItem);
     setItems(newItems);
+    handleUpdateSongPlayList(newItems);
   };
 
   return (
     <div
       className="overflow-auto"
       style={{
-        height: "calc(100vh - calc(var(--h-bottom) + var(--h-header)))",
+        height: `calc(100vh - (calc(var(--h-bottom) + var(--h-header)) + 56px))`,
       }}
     >
       <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -60,7 +62,6 @@ function ListItem({ playList }) {
 
 function Item({ item }) {
   const { song } = useSelector((state) => state.musicPlay);
-
   const { handleGetSong } = useHandleMusic();
   return (
     <div

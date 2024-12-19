@@ -1,33 +1,28 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-
-
-*{
-  padding:  0;
+* {
+  padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
 body {
- 
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 
 img {
   width: 100%;
@@ -35,65 +30,66 @@ img {
 }
 
 /* mau */
-:root{
+:root {
   --h-header: 70px;
   --bg-main: #170f23;
   --text-pink: #a966cf;
   --text-purple: #9b4de0;
   --text-sub: #ffffff80;
-  --bg-bottom:  #130c1c;
-  --w-nav-bar:420px;
+  --bg-bottom: #130c1c;
+  --w-nav-bar: 360px;
   --pd-content: 20px;
-  --bg-wrap:#5b606025;
+  --bg-wrap: #5b606025;
 
-  --h-bottom: 90px;
+  --h-bottom: 100px;
   /*  */
   --color-main-page: #121212;
   --color-extra: #000000;
 
   /* pink */
-  --color-pink-normal: #EE10B0;
-  --color-pink-normal-hover: #D60E9E;
-  --color-pink-normal-active: #BE0D8D;
-  --color-pink-dark: #B30C84;
-  --color-pink-dark-hover: #8F0A6A;
-  --color-pink-dark-active: #6B074F;
-  --color-pink-darker: #53063E;
+  --color-pink-normal: #ee10b0;
+  --color-pink-normal-hover: #d60e9e;
+  --color-pink-normal-active: #be0d8d;
+  --color-pink-dark: #b30c84;
+  --color-pink-dark-hover: #8f0a6a;
+  --color-pink-dark-active: #6b074f;
+  --color-pink-darker: #53063e;
 
   /* blue */
 
-  --color-blue-normal : #0E9EEF;
-  --color-blue-normal-hover: #0D8ED7;
-  --color-blue-normal-active: #0B7EBF;
-  --color-blue-dark : #0B77B3;
-  --color-blue-dark-hover: #085F8F;
-  --color-blue-dark-active: #06476C;
+  --color-blue-normal: #0e9eef;
+  --color-blue-normal-hover: #0d8ed7;
+  --color-blue-normal-active: #0b7ebf;
+  --color-blue-dark: #0b77b3;
+  --color-blue-dark-hover: #085f8f;
+  --color-blue-dark-active: #06476c;
   --color-blue-darker: #053754;
-  
+
   --svg-filter: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=");
 }
-
 
 @layer utilities {
   /* bg */
   .gradient-base-detail {
-    background-image: linear-gradient(rgba(0, 0, 0, .6) 0, #121212 100%), var(--svg-filter);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6) 0, #121212 100%),
+      var(--svg-filter);
   }
 
   .gradient-base-detail-2 {
-    background: linear-gradient(transparent 0, rgba(0, 0, 0, .5) 100%), var(--svg-filter);
-
+    background: linear-gradient(transparent 0, rgba(0, 0, 0, 0.5) 100%),
+      var(--svg-filter);
   }
 
-  .gradient-base-detail-top{
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, #121212 100%), var(--svg-filter);
+  .gradient-base-detail-top {
+    background-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.6) 0%,
+        #121212 100%
+      ),
+      var(--svg-filter);
   }
 
   /* end bg */
-  
-
-
-
 
   .custom-text-stroke {
     -webkit-text-stroke: 1px #4a90e2;
@@ -108,15 +104,11 @@ img {
     transform: translate(35px, -35px) scale(1.21212);
   }
 
-
-
-
   .hover-pink-normal {
     @apply hover:text-[var(--color-pink-normal-hover)];
   }
 
-
-  .hover-bg-pink-dark{
+  .hover-bg-pink-dark {
     @apply hover:bg-[var(--color-pink-dark-hover)];
   }
 
@@ -124,8 +116,6 @@ img {
     box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
   }
 
-
- 
   .gradient-text {
     font-size: 40px;
     font-weight: bold;
@@ -133,17 +123,12 @@ img {
     -webkit-background-clip: text;
     color: transparent;
   }
-  
 }
-
 
 .notify-player {
   animation: slide-up 0.5s ease-out;
 }
 
-
-
 ::-webkit-scrollbar {
   width: 0; /* Chiều rộng của thanh cuộn */
 }
-

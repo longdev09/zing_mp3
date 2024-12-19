@@ -9,20 +9,17 @@ import { useEffect, useRef, useState } from "react";
 function PlayList({ title, subTitle, imgBg, dataSource, columns }) {
   const { isPlay, playList } = useSelector((state) => state.musicPlay);
   const { handleSetPlayList, handlePlause, handlePlay } = useHandleMusic();
-  const [dominantColor, setDominantColor] = useState([0, 0, 0]); // Màu mặc định là đen
+  const [dominantColor, setDominantColor] = useState([0, 0, 0]);
   const imgRef = useRef(null);
 
-  // xu ly lay mau theo anh de lam cai bg
   useEffect(() => {
     const imgElement = imgRef.current;
     const colorThief = new ColorThief();
 
     if (imgElement.complete) {
-      // Nếu hình ảnh đã load xong
       const color = colorThief.getColor(imgElement);
       setDominantColor(color);
     } else {
-      // Nếu hình ảnh chưa load xong
       imgElement.addEventListener("load", () => {
         const color = colorThief.getColor(imgElement);
         setDominantColor(color);
@@ -36,61 +33,58 @@ function PlayList({ title, subTitle, imgBg, dataSource, columns }) {
         style={{
           backgroundColor: `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`,
         }}
-        className="gradient-base-detail-2 relative h-[280px] w-full flex-none overflow-hidden rounded-t-lg px-[var(--pd-content)]"
+        className="gradient-base-detail-2 relative flex h-auto w-full flex-col items-center gap-4 overflow-hidden rounded-t-lg px-[var(--pd-content)] py-6 sm:h-[280px] sm:flex-row sm:gap-6"
       >
-        <div className="absolute bottom-0 top-0 flex items-center gap-6">
-          <div className="h-[230px] w-[230px]">
-            <img
-              ref={imgRef}
-              className="shadow-custom-img rounded-lg"
-              src={imgBg}
-              crossOrigin="anonymous" // Cần để lấy được màu từ ảnh từ các nguồn ngoài
-            />
-          </div>
-          <div className="flex flex-col gap-3 font-semibold text-white">
-            <span>{subTitle}</span>
-            <h2 className="text-8xl font-extrabold">{title}</h2>
-          </div>
+        <div className="h-[180px] w-[180px] sm:h-[230px] sm:w-[230px] lg:h-[250px] lg:w-[250px]">
+          <img
+            ref={imgRef}
+            className="shadow-custom-img h-full w-full rounded-lg object-cover"
+            src={imgBg}
+            crossOrigin="anonymous"
+          />
+        </div>
+        <div className="flex flex-col gap-3 text-center text-white sm:text-left">
+          <span className="text-sm sm:text-base">{subTitle}</span>
+          <h2 className="text-xl font-extrabold sm:text-2xl md:text-4xl">
+            {title}
+          </h2>
         </div>
       </div>
       <div className="bg-[var(--color-main-page)]">
         <div
-          className="gradient-base-detail relative h-[232px] w-full px-[var(--pd-content)]"
+          className="gradient-base-detail relative flex h-[100px] w-full items-center justify-start gap-4 px-[var(--pd-content)]"
           style={{
             backgroundColor: `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`,
           }}
         >
-          <div className="flex flex-row items-center gap-4 py-5">
-            {/* lay danh sach */}
-            {isPlay ? (
-              <Button
-                onClick={handlePlause}
-                label={<FaPause />}
-                variant={"roundedBig"}
-              />
-            ) : playList == null ? (
-              <Button
-                onClick={() =>
-                  handleSetPlayList(
-                    "new-release",
-                    dataSource,
-                    dataSource[0].encodeId,
-                  )
-                }
-                label={<FaPlay />}
-                variant={"roundedBig"}
-              />
-            ) : (
-              <Button
-                onClick={handlePlay}
-                label={<FaPlay />}
-                variant={"roundedBig"}
-              />
-            )}
-            <Button label={<FaPlus />} variant={"roundedNoBg"} />
-          </div>
+          {isPlay ? (
+            <Button
+              onClick={handlePlause}
+              label={<FaPause />}
+              variant={"roundedBig"}
+            />
+          ) : playList == null ? (
+            <Button
+              onClick={() =>
+                handleSetPlayList(
+                  "new-release",
+                  dataSource,
+                  dataSource[0].encodeId,
+                )
+              }
+              label={<FaPlay />}
+              variant={"roundedBig"}
+            />
+          ) : (
+            <Button
+              onClick={handlePlay}
+              label={<FaPlay />}
+              variant={"roundedBig"}
+            />
+          )}
+          <Button label={<FaPlus />} variant={"roundedNoBg"} />
         </div>
-        <div className="relative top-[-130px] h-full w-full overflow-hidden">
+        <div className="relative top-[-10px] h-full w-full overflow-hidden">
           <ListSong dataSource={dataSource} columns={columns} />
         </div>
       </div>

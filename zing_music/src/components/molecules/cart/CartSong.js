@@ -17,15 +17,22 @@ import ShowArtists from "../../atoms/ShowArtists";
 
 function CartSong({ item }) {
   const { handleSetPlayList, handlePlay, handlePlause } = useHandleMusic();
+
+  // lấy playlist
   const { playList, loadingSong, isPlay } = useSelector(
     (state) => state.musicPlay,
   );
-
+  //  lay danh sach bai hat
   const { data, error, isLoading } = useQuery({
     queryKey: ["list", item?.encodeId],
     queryFn: list,
   });
 
+  if (error) {
+    console.log("Lỗi Server");
+  }
+
+  //  cart song
   return (
     <div className="px-2">
       <div className="group w-full cursor-pointer overflow-hidden rounded-lg">
@@ -47,8 +54,7 @@ function CartSong({ item }) {
             } transition duration-300 group-hover:opacity-100`}
           >
             <div className="flex flex-row items-center justify-around px-3 text-white">
-              <FaHeart className="text-2xl" />
-              <div className="flex h-[40px] w-[40px] items-center justify-center rounded-full border">
+              <div className="shadow-custom-img flex h-[50px] w-[50px] items-center justify-center rounded-full bg-[var(--color-blue-normal)]">
                 {playList?.idList == item.encodeId ? (
                   loadingSong ? (
                     <IconLoading />
@@ -57,23 +63,22 @@ function CartSong({ item }) {
                   ) : (
                     <FaPlay
                       onClick={handlePlay}
-                      className="text-lg text-white"
+                      className="text-xl text-white"
                     />
                   )
                 ) : (
                   <FaPlay
                     onClick={() =>
                       handleSetPlayList(
-                        item.encodeId,
-                        data?.song?.items,
+                        item.encodeId, // nhan vao danh bai hat
+                        data?.song?.items, // nhan vao bai hat dau tien
                         data?.song?.items[0].encodeId,
                       )
                     }
-                    className="text-lg text-white"
+                    className="text-xl text-white"
                   />
                 )}
               </div>
-              <FaEllipsis className="text-2xl" />
             </div>
           </div>
         </div>

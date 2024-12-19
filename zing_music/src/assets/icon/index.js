@@ -24,6 +24,14 @@ import {
   faX,
   faPlus,
   faLayerGroup,
+  faEyeSlash,
+  faEye,
+  faCheck,
+  faArrowUpRightFromSquare,
+  faMusic,
+  faPen,
+  faHouse,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import iconPlaying from "../Bg/icon-playing.gif";
@@ -121,6 +129,40 @@ export const FaLayerGroup = ({ ...props }) => (
   <FontAwesomeIcon icon={faLayerGroup} {...props} />
 );
 
+export const FaEyeSlash = ({ ...props }) => (
+  <FontAwesomeIcon icon={faEyeSlash} {...props} />
+);
+
+export const FaEye = ({ ...props }) => (
+  <FontAwesomeIcon icon={faEye} {...props} />
+);
+
+export const FaCheck = ({ ...props }) => (
+  <FontAwesomeIcon icon={faCheck} {...props} />
+);
+
+export const FaArrowUpRightFromSquare = ({ ...props }) => (
+  <FontAwesomeIcon icon={faArrowUpRightFromSquare} {...props} />
+);
+
+export const FaX = ({ ...props }) => <FontAwesomeIcon icon={faX} {...props} />;
+
+export const FaMusic = ({ ...props }) => (
+  <FontAwesomeIcon icon={faMusic} {...props} />
+);
+
+export const FaPen = ({ ...props }) => (
+  <FontAwesomeIcon icon={faPen} {...props} />
+);
+
+export const FaHouse = ({ ...props }) => (
+  <FontAwesomeIcon icon={faHouse} {...props} />
+);
+
+export const FaUser = ({ ...props }) => (
+  <FontAwesomeIcon icon={faUser} {...props} />
+);
+
 export const LogoGg = () => (
   <svg
     width="18"
@@ -151,8 +193,6 @@ export const LogoGg = () => (
     </g>
   </svg>
 );
-
-export const FaX = ({ ...props }) => <FontAwesomeIcon icon={faX} {...props} />;
 
 export const IconDiscover = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">

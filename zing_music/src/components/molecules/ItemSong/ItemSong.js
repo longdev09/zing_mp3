@@ -9,14 +9,6 @@ import get from "lodash/get";
 function ItemSong({ listSong, columns, data, index }) {
   return (
     <div className="hover-bg-pink-dark group relative flex cursor-pointer flex-row items-center gap-4 rounded-lg p-2 duration-300">
-      <div className="tran absolute right-[100px] opacity-0 group-hover:opacity-100">
-        <Button
-          label={<FaPlus />}
-          variant={"roundedNoBg"}
-          className="h-5 w-5 !text-[10px]"
-        />
-      </div>
-
       {columns?.map((col) => (
         <div key={col.key} className={col.className} sss>
           {col.type == "TextDefault" ? (
@@ -64,7 +56,7 @@ function TextReleaseDate({ text }) {
 
 function TextDefault({ text }) {
   return (
-    <div className="text-sm text-[#b3b3b3]">
+    <div className="hidden text-sm text-[#b3b3b3] lg:block">
       <span>{text}</span>
     </div>
   );
